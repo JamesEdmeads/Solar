@@ -1,0 +1,121 @@
+/*for phones*/
+
+#planetSizeSlide .noUi-base {
+  background: white;
+}
+
+#orbitDisSlide .noUi-base {
+  background: white;
+}
+
+#speedSlide .noUi-base {
+  background: white;
+}
+
+#orbitDistance  {
+  top : 50px;
+  right : 65%;
+}
+
+#orbitHelp  {
+  top : 55px;
+}
+
+#close  {
+  top : 65px;
+}
+
+#far  {
+  top : 65px;
+}
+
+#colour  {
+  top : 275px;
+  right : 65%;
+}
+
+#colourHelp  {
+  position : absolute;
+  top : 275px;
+}
+
+#planetSize  {
+  top : 200px;
+  right : 65%;
+}
+
+
+#sizeHelp  {
+  top : 205px;
+}
+
+#small, #large  {
+  top : 220px;
+}
+
+
+#speedOrbit  {
+  top : 130px;
+  right : 65%;
+}
+
+#speedHelp  {
+  top : 135px;
+}
+
+#slow, #fast  {
+  top : 145px;
+}
+
+
+#orbitDisSlide{
+  top: 55px;
+}
+
+
+#planetSizeSlide{
+  top: 205px;
+}
+
+#speedSlide{
+  top: 130px;
+}
+
+#colorSelect {
+
+  position : relative;
+  top : 275px;
+}
+
+select  {
+  width  :30%;
+  left : 2%;
+}
+
+#Go  {
+  position : absolute;
+  top : 350px;
+  left : 37%;
+}
+
+.modal {
+  width: 50%;
+  top : 50px;
+}
+
+/* Modal Content */
+.modal-content {
+  padding: 20px;
+}
+
+#ColorHelpMod {
+  top : 275px;
+}
+
+#SizeHelpMod  {
+  top : 200px;
+}
+
+#SpeedHelpMod  {
+  top : 130px;
+}

@@ -1,0 +1,53 @@
+/*for phones*/
+
+body {
+  background-size : auto-cover;
+}
+
+h1  {
+  font-size: 3em;
+  left : 10%;
+  width: 80%;
+}
+
+form  {
+  top : 350px;
+  left: 20%;
+}
+
+button {
+  width : 80%;
+}
+ 
+
+#solarsystem  {
+  left : 20%;
+  top : 75px;
+  width : 100%;
+}
+
+#solarbuilder  {
+  left : 20%;
+  top : 230px;
+  width : 100%;
+}
+
+#solnounanddef  {
+  top : 43px;
+}
+
+#Buildnounanddef  {
+  top : 43px;
+}
+
+#solarDef  {
+  left: 5%;
+  width : 320px;
+}
+
+#BuildDef  {
+  left: 5%;
+  width : 320px;
+}
+
+

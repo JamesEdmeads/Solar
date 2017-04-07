@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <title>SOLARBUILDER</title>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" href="images/favimage.png"></link>
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"></link>
+  <link href="nouislider/nouislider.min.css" rel="stylesheet"></link>
+  <link href="stylesheets/choice.css"  media="screen"
+       rel="stylesheet" type="text/css" ></link>
+  <link rel="stylesheet" media="screen and (max-width : 600px) "
+       href="stylesheets/chphone.css" type="text/css" ></link>
+
+</head>
+<body>
+  <script src = "js/choice.js"></script>
+  <script src = "noUiSlider/nouislider.min.js"></script>
+  <form id = "All" method="post" action="http://localhost:8080/save" >
+    <div id = "orbitDistance">Orbit Distance</div>
+    <div id = "orbitDisSlide">
+    <input type="hidden" name = "distance" value ="0" id="orbdis"></input>
+    </div>
+    <p id = "close">close</p>
+    <p id = "far">far</p>
+
+    <div id = "planetSize">Size of Planet</div>
+    <div id = "planetSizeSlide">
+    <input type="hidden" name = "size" value ="0" id="plansize"></input>
+    </div>
+    <p id = "small">small</p>
+    <p id = "large">large</p>
+
+    <div id = "speedOrbit">Speed of Planet</div>
+    <div id = "speedSlide">
+    <input type="hidden" name = "speed" value ="0" id="spchange"></input>
+    </div>
+    <p id = "slow">slow</p>
+    <p id = "fast">fast</p>
+
+    <div id = "colour">Colour</div>
+    <div id = "colorSelect" method="get" class = "table">
+      <input type = "hidden" name = "colour" value ="red" id="col"></input>
+      <select id = "Colchoice">
+        <option value = "red">red</option>
+        <option value = "blue">blue</option>
+      </select>
+    </div>
+
+    <input id="Go" type="submit" value="Send"/>
+
+  </form>
+
+  <button id = "orbitHelp">?</button>
+  <button id = "sizeHelp">?</button>
+  <button id = "speedHelp">?</button>
+  <button id = "colourHelp">?</button>
+
+  <div id = "OhelpModal" class="modal">
+    <div class="modal-content">
+      <span id = "X0">X</span>
+        <p>Select the planets distance from the sun</p>
+    </div>
+  </div>
+
+  <div id = "ColorHelpMod" class="modal">
+    <div class="modal-content" >
+      <span id = "X1">X</span>
+        <p>Select the colour of your planet</p>
+    </div>
+  </div>
+
+  <div id = "SizeHelpMod" class="modal">
+    <div class="modal-content">
+      <span id = "X2">X</span>
+        <p>Select the size of your planet</p>
+    </div>
+  </div>
+
+  <div id = "SpeedHelpMod" class="modal">
+    <div class="modal-content">
+      <span id = "X3">X</span>
+        <p>Select the speed of your planet</p>
+    </div>
+  </div>
+
+</body>
+
+</html>
