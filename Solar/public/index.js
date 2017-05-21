@@ -1,39 +1,52 @@
 "use strict";
 
+//On startup, loads values from server. NOTE edge case access without preloading?
 window.onload = server();
 
-//Attributes of Venus are changed here
-var speed = 0;
-var size = 0;
-var distance = 0;
-var colour = "blue";
+//2D array holds the values for each planet
+var planetNum = 5;
+var planets = createArray(planetNum);
 
-//Runs automaticaly the SolarSystem when all data is stored.
-// window.onload = onStart();
+//Creates 2D array filled with zeros.
+function createArray(planetNum){
+  var planets = []; //new Array is bad: https://www.w3schools.com/js/js_arrays.asp
+  for(var i=0;i<planetNum;i++){
+    var values = {speed:0, size:0, distance:0, colour:null};
+    planets[i] = values;
+  }
 
+  return planets;
+}
+
+//Gets data from the server
 function server(){
-   var xmlhttp = new XMLHttpRequest();
-   var string;
-   xmlhttp.open("GET","http://localhost:8080/load", true);
-   xmlhttp.onreadystatechange=function(){
-         if (xmlhttp.readyState==4 && xmlhttp.status==200){
-           string=xmlhttp.responseText;
-           console.log("STRING", string);
-           var attributes = string.split("&");
 
-           distance = attributes[0];
-           console.log("distance", distance);
-           size = attributes[1];
-           console.log("size", size);
-           speed = parseFloat(attributes[2]);
-           console.log("speed", speed);
-           colour = attributes[3];
-           console.log("colour", colour);
+  var xmlhttp = new XMLHttpRequest();
+  var string;
+  xmlhttp.open("GET","http://localhost:8080/load", true);
+  xmlhttp.onreadystatechange=function(){
+     if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        string=xmlhttp.responseText;
+        console.log("STRING", string);
+        var attributes = string.split("&");
 
-           system();
-         }
+        planets[0]["distance"] = attributes[0];
+        console.log("distance", planets[0]["distance"]);
+
+        planets[0]["size"] = attributes[1];
+        console.log("size", planets[0]["distance"]);
+
+        planets[0]["speed"] = parseFloat(attributes[2]);
+        console.log("speed", planets[0]["speed"]);
+
+        planets[0]["colour"] = attributes[3];
+        console.log("colour", planets[0]["colour"]);
+
+        system();
+     }
    }
    xmlhttp.send();
+
 }
 
 //The SolarSystem function
@@ -94,12 +107,12 @@ function system()  {
   var marsangle = 0;
 
   //Jupiter already allows for change of texture
-  var jupiter	= THREEx.Planets.createSun();
+  var jupiter	= THREEx.Planets.createJupiter(planets[0]["colour"]);
 
-  var venus	= THREEx.Planets.createJupiter(colour);
-  venus.scale.x = size;
-  venus.scale.y = size;
-  venus.scale.z = size;
+  var venus	= THREEx.Planets.createVenus();
+  venus.scale.x = planets[0]["size"];
+  venus.scale.y = planets[0]["size"];
+  venus.scale.z = planets[0]["size"];
   venus.position.x = 0;
   venus.position.y = 0;
   venus.position.z = 0;
@@ -126,21 +139,19 @@ function system()  {
   scene.add(earth);
 
   updateFcts.push(function(delta, now){
-		venus.rotation.z += 3 * delta;
-	  mars.rotation.z += 4 * delta;
-	  earth.rotation.z += 1 * delta;
-	  jupiter.rotation.z += 0.125 * delta;
+		venus.rotation.x += 3 * delta;
+	  mars.rotation.x += 4 * delta;
 	});
 
   updateFcts.push(function(){
-    venus.position.x = distance * Math.cos(venusangle * Math.PI / 180);
-    venus.position.y = distance * Math.sin(venusangle * Math.PI / 180);
+    venus.position.x = planets[0]["distance"] * Math.cos(venusangle * Math.PI / 180);
+    venus.position.y = planets[0]["distance"] * Math.sin(venusangle * Math.PI / 180);
     mars.position.x = 2 * Math.cos(marsangle * Math.PI / 180);
     mars.position.y = 2 * Math.sin(marsangle * Math.PI / 180);
     earth.position.x = 3 * Math.cos(earthangle * Math.PI / 180);
     earth.position.y = 3 * Math.sin(earthangle * Math.PI / 180);
 
-    venusangle += speed;
+    venusangle += planets[0]["speed"];
     earthangle += 0.5;
     marsangle += 0.3;
   });

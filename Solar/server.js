@@ -65,17 +65,27 @@ function handle(request, response) {
           parameters = parameters + params.speed + "&";
           parameters = parameters + params.colour;
           console.log("PARA", parameters);
-          renderHTML("./public/solar.html", response, type);
+          if(cnt == 5){
+            renderHTML("./public/solar.html", response, type);
+          }else{
+            renderHTML("./public/choice.html", response, type);
+          }
         }
         break;
 
       case "/load":
         console.log("LOAD");
         console.log("PARALOAD", parameters);
-        var textTypeHeader = { "Content-Type": "text/plain" };
-        response.writeHead(200, textTypeHeader);
-        response.end(parameters);
-        break;
+
+        dbmethod.getplanet(execute);
+
+        function execute(result){
+          var textTypeHeader = { "Content-Type": "text/plain" };
+          response.writeHead(200, textTypeHeader);
+          response.end(result);
+        }
+
+      break;
 
       default:
         console.log("DEFAULT");

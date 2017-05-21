@@ -29,7 +29,7 @@ THREEx.Planets.createMercury	= function(){
 	return mesh
 }
 
-THREEx.Planets.createVenus	= function(colour){
+THREEx.Planets.createVenus	= function(){
 	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)
 	var material	= new THREE.MeshPhongMaterial({
 		map	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/venusmap.jpg'),
@@ -136,7 +136,7 @@ THREEx.Planets.createMars	= function(){
 
 THREEx.Planets.createJupiter	= function(test){
 	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)
-	if( test == "blue"){
+	if( test == "red"){
 		var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/testplanet.jpg')
 	}else{
 		var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/jupitermap.jpg')
