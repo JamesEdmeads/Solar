@@ -18,7 +18,6 @@ var fs = require("fs");
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var types, banned, parameters = "";
 var dbmethod = require("./db/db.js");
-var cnt = 0; //for db at present
 start(8080);
 
 // Start the http service.  Accept only requests from localhost, for security.
@@ -44,6 +43,18 @@ function handle(request, response) {
 
 //MADNESS BEGINS:
     switch (url) {
+      /*****************************************
+        added this check case to check receiving from landing.html
+      ******************************************/
+      case "/check":
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!RECIEVED!!!!!!!!!!!!!!!!!!!!!");
+        function sendBackTest(){
+          var textTypeHeader = { "Content-Type": "text/plain" };
+          response.writeHead(200, textTypeHeader);
+          response.end("DONE");
+        }
+        break;
+        
       case "/save":
         // what happens at the back - get the data
         request.on('data', add);
@@ -54,18 +65,21 @@ function handle(request, response) {
         function add(chunk) { body = body + chunk.toString(); }
 
         // splits the usefull data into an array
+        
+        /*********************************************
+        * added count from choice.js as params.count and set the 5 check to this
+        *********************************************/
         function end() {
           var params = QS.parse(body);
           console.log(params.distance, params.size, params.speed, params.colour);
-          dbmethod.insert(cnt, params.distance, params.size, params.speed, params.colour, 1); //TODO - change cnt and 1;
-          cnt++;
+          dbmethod.insert(params.count, params.distance, params.size, params.speed, params.colour, 1); //TODO -1;
           parameters = "";
           parameters = parameters + params.distance + "&";
           parameters = parameters + params.size + "&";
           parameters = parameters + params.speed + "&";
           parameters = parameters + params.colour;
           console.log("PARA", parameters);
-          if(cnt == 5){
+          if(params.count >= 5){
             renderHTML("./public/solar.html", response, type);
           }else{
             renderHTML("./public/choice.html", response, type);

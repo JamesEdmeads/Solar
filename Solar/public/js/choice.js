@@ -86,6 +86,19 @@ function ColourSel()  {
   document.getElementById('col').value = text0;
 }
 
+//updates session count and sets in the html form
+function setCount()  {
+
+  var count = sessionStorage.getItem('cnt');
+  if(count > 5)  {
+    sessionStorage.clear();
+  }
+  count++;
+  document.getElementById('planetCount').value = count;
+  sessionStorage.setItem('cnt', count);
+
+}
+
 function setUp() {
   "use strict";
   var OrbHelp = document.getElementById('orbitHelp');
@@ -114,7 +127,9 @@ function setUp() {
   actionSliders(all);
   actionHelp(helpAll);
   actionFinish(allFinish);
-
+  
+  //new to set count on form
+  setCount();
 
 }
 

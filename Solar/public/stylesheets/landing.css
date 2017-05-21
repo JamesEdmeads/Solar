@@ -35,38 +35,28 @@ form  {
   position : absolute;
   top : 400px;
   text-align : center;
-  left: 38%;
+  left: 45%;
   right : 35%;
-}
-
-input[type=text], select {
-  width : 100%;
-  padding: 6px 11px;
-  margin: 5px 0;
-  border: 2px solid white;
-  border-radius: 1px;
-  box-sizing: border-box;
-  background-color : black;
-  color : white;
-}
-
-label  {
-  display: block;
-  float : left;
-  color : white;
-  width: 10%;
 }
 
 button {
   font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
-  width : 30%;
   background-color: white;
+  width : 200px;
   border: none;
   color: black;
   padding: 8px 14px;
   text-decoration: none;
   margin: 5px 2px;
   cursor: pointer;
+  display : none;
+}
+
+#choosePlanet  {
+  position : relative;
+  top : 30px;
+  padding: 8px 25px;
+
 }
 
 #solarsystem  {
