@@ -1,30 +1,10 @@
 //event method passed and js should find event.target
 
-//size : 0.1 - 2
-//distance : 1 - 10
-//speed : 0.1 - 0.5
 
-function help0(event)  {
+function help(event)  {
   "use strict";
-  var modal = document.getElementById('OhelpModal');
-   modal.style.display = "block";
-}
-
-function help1()  {
-  "use strict";
-  var modal = document.getElementById('ColorHelpMod');
-  modal.style.display = "block";
-}
-
-function help2()  {
-  "use strict";
-  var modal = document.getElementById('SizeHelpMod');
-  modal.style.display = "block";
-}
-
-function help3()  {
-  "use strict";
-  var modal = document.getElementById('SpeedHelpMod');
+  var modal = this.nextElementSibling;
+  console.log(modal)
   modal.style.display = "block";
 }
 
@@ -56,21 +36,6 @@ function actionSliders(arr)  {
       document.getElementById('spchange').value = newvalue;
     });
 
-  /*for(i = 0; i < arr.length; i++)  {
-    var x = arr[i].firstElementChild.value;
-    console.log(x);
-    arr[i].noUiSlider.on('slide', function( values, handle, x) {
-      var newvalue = values[handle];
-      console.log(newvalue);
-      console.log(x);
-      console.log(this);
-      document.getElementById('orbdis').value = newvalue;
-      document.getElementById('plansize').value = newvalue;
-      document.getElementById('spchange').value = newvalue;
-    });
-
-  }*/
-
 }
 
 //unable to use strict with this function due to noUiSlider non-compatibility
@@ -97,9 +62,19 @@ function createSliders(arr)  {
 
 }
 
+function actionHelp(helpAll)  {
+  "use strict";
+  for(i = 0; i < helpAll.length; i++)  {
+      console.log(helpAll[i]);
+    helpAll[i].addEventListener('click', help);
+  }
+
+}
+
 function actionFinish(fin)  {
   "use strict";
   for(i = 0; i < fin.length; i++)  {
+
     fin[i].addEventListener('click', stop);
   }
 }
@@ -129,20 +104,15 @@ function setUp() {
   var SlideSpeed = document.getElementById('speedSlide');
 
   var valueInput = document.getElementById('value-input');
-
+ 
   var all = [SlideDis, SlideSize, SlideSpeed];
-
-  OrbHelp.addEventListener('click', help0);
-  ColourHelp.addEventListener('click', help1);
-  SizeHelp.addEventListener('click', help2);
-  SpeedHelp.addEventListener('click', help3);
-
-  Col.addEventListener('click', ColourSel);
-
+  var helpAll = [OrbHelp, ColourHelp, SizeHelp, SpeedHelp];
   var allFinish = [finish0, finish1, finish2, finish3];
-
+  Col.addEventListener('click', ColourSel);
+ 
   createSliders(all);
   actionSliders(all);
+  actionHelp(helpAll);
   actionFinish(allFinish);
 
 
