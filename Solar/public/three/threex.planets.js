@@ -136,7 +136,7 @@ THREEx.Planets.createMars	= function(){
 
 THREEx.Planets.createJupiter	= function(test){
 	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)
-	if( test == "red"){
+	if( test == "black"){
 		var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/testplanet.jpg')
 	}else{
 		var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/jupitermap.jpg')

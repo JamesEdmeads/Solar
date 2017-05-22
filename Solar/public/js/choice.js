@@ -81,9 +81,12 @@ function actionFinish(fin)  {
 
 function ColourSel()  {
   "use strict";
+  console.log("before change" + document.getElementById('col').value)
   var value = document.getElementById('Colchoice');
   var text0 = value.options[value.selectedIndex].text;
   document.getElementById('col').value = text0;
+  console.log("selected from drop down" + text0);
+  console.log("in hidden file" + document.getElementById('col').value)
 }
 
 //updates session count and sets in the html form
@@ -121,7 +124,7 @@ function setUp() {
   var all = [SlideDis, SlideSize, SlideSpeed];
   var helpAll = [OrbHelp, ColourHelp, SizeHelp, SpeedHelp];
   var allFinish = [finish0, finish1, finish2, finish3];
-  Col.addEventListener('click', ColourSel);
+  Col.addEventListener('change', ColourSel);
 
   createSliders(all);
   actionSliders(all);
