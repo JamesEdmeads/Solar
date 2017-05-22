@@ -31,6 +31,7 @@ function start(port) {
     var address = "http://localhost";
     if (port != 80) address = address + ":" + port;
     console.log("Server running at", address);
+    dbmethod.cleanDB();
 }
 
 // Serve a request by delivering a file.

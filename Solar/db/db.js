@@ -81,6 +81,19 @@ module.exports = {
     function ready(err, row){
       console.log("RETURNING SOMETHING", row.id);
     }
+  },
+  
+  //cleans the db on server re-start
+  cleanDB : function()  {
+    var ps = db.prepare("DELETE FROM planet");
+    ps.run();
+    ps.finalize();
+    var ps2 = db.prepare("DELETE FROM system");
+    ps2.run();
+    ps2.finalize();
+    var ps3 = db.prepare("VACUUM");
+    ps3.run();
+    ps3.finalize();
   }
 
 };
