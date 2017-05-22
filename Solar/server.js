@@ -18,6 +18,7 @@ var fs = require("fs");
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var types, banned, parameters = "";
 var dbmethod = require("./db/db.js");
+var cnt = 1;
 start(8080);
 
 // Start the http service.  Accept only requests from localhost, for security.
@@ -41,20 +42,26 @@ function handle(request, response) {
     var type = findType(url);
     console.log("requests:", url);
 
-//MADNESS BEGINS:
+// Checks if user already create a system, if not returns new uid.
+function checkUID(id){
+  //TODO
+}
+
+// The main tree of the website:
     switch (url) {
-      /*****************************************
-        added this check case to check receiving from landing.html
-      ******************************************/
+
+      //Landing
       case "/check":
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!RECIEVED!!!!!!!!!!!!!!!!!!!!!");
-        function sendBackTest(){
+        checkUser(id, execute);
+
+        function execute(result){
           var textTypeHeader = { "Content-Type": "text/plain" };
           response.writeHead(200, textTypeHeader);
-          response.end("DONE");
+          response.end(result);
         }
-        break;
-        
+      break;
+
       case "/save":
         // what happens at the back - get the data
         request.on('data', add);
@@ -65,40 +72,35 @@ function handle(request, response) {
         function add(chunk) { body = body + chunk.toString(); }
 
         // splits the usefull data into an array
-        
-        /*********************************************
-        * added count from choice.js as params.count and set the 5 check to this
-        *********************************************/
         function end() {
           var params = QS.parse(body);
           console.log(params.distance, params.size, params.speed, params.colour);
-          dbmethod.insert(params.count, params.distance, params.size, params.speed, params.colour, 1); //TODO -1;
+          dbmethod.insert(params.distance, params.size, params.speed, params.colour, 1); //TODO userID;
           parameters = "";
           parameters = parameters + params.distance + "&";
           parameters = parameters + params.size + "&";
           parameters = parameters + params.speed + "&";
           parameters = parameters + params.colour;
-          console.log("PARA", parameters);
+
+          // added count from choice.js as params.count and set the 5 check to this
           if(params.count >= 5){
             renderHTML("./public/solar.html", response, type);
           }else{
             renderHTML("./public/choice.html", response, type);
           }
         }
-        break;
+      break;
 
       case "/load":
-        console.log("LOAD");
-        console.log("PARALOAD", parameters);
-
-        dbmethod.getplanet(execute);
+        //NOTE hardcode 1 for now.
+        dbmethod.getplanet(execute, 1);
 
         function execute(result){
           var textTypeHeader = { "Content-Type": "text/plain" };
           response.writeHead(200, textTypeHeader);
+          console.log(result);
           response.end(result);
         }
-
       break;
 
       default:

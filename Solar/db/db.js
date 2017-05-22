@@ -41,9 +41,10 @@ function addUser(id)  {
 }
 
 module.exports = {
-  insert: function (planet, dist, p_size, speed, color, user)  {
-    var ps = db.prepare("insert into planet values(?,?,?,?,?,?)");
-    ps.run(planet,dist, p_size, speed, color, user);
+  //TODO maybe callback?
+  insert: function (dist, p_size, speed, color, user)  {
+    var ps = db.prepare("insert into planet (distance, p_size, speed, colour, sys_id) values(?,?,?,?,?)");
+    ps.run(dist, p_size, speed, color, user);
     ps.finalize();
 
     /*test functions - all working
@@ -54,16 +55,31 @@ module.exports = {
     */
   },
 
-  getplanet: function(execute)  {
-    db.get("select * from planet where id = 1", ready);
+  // TODO catch edge scenarios
+  getplanet: function(execute, id)  {
+    var ps = db.prepare("select * from planet where sys_id = ?");
+    ps.all(id, ready);
+
+    function ready(err, rows){
+      var result = "";
+      var i;
+      for(i = 0; i<5; i++){
+        result = result + rows[i]["distance"] + "&";
+        result = result + rows[i]["p_size"] + "&";
+        result = result + rows[i]["speed"] + "&";
+        result = result + rows[i]["colour"] + "&";
+      }
+      execute(result);
+    }
+  },
+
+  //Checks if user exists if no user generates a new user, returns id.
+  checkUser: function(id, execute){
+    var ps = db.prepare("select id from system where id = ?");
+    ps.get(id, ready);
 
     function ready(err, row){
-      var result = "";
-      result = result + row.distance + "&";
-      result = result + row.p_size + "&";
-      result = result + row.speed + "&";
-      result = result + row.colour;
-      execute(result);
+      console.log("RETURNING SOMETHING", row.id);
     }
   }
 

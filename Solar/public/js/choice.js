@@ -117,17 +117,17 @@ function setUp() {
   var SlideSpeed = document.getElementById('speedSlide');
 
   var valueInput = document.getElementById('value-input');
- 
+
   var all = [SlideDis, SlideSize, SlideSpeed];
   var helpAll = [OrbHelp, ColourHelp, SizeHelp, SpeedHelp];
   var allFinish = [finish0, finish1, finish2, finish3];
   Col.addEventListener('click', ColourSel);
- 
+
   createSliders(all);
   actionSliders(all);
   actionHelp(helpAll);
   actionFinish(allFinish);
-  
+
   //new to set count on form
   setCount();
 

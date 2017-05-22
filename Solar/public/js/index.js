@@ -29,19 +29,14 @@ function server(){
         string=xmlhttp.responseText;
         console.log("STRING", string);
         var attributes = string.split("&");
-
-        planets[0]["distance"] = attributes[0];
-        console.log("distance", planets[0]["distance"]);
-
-        planets[0]["size"] = attributes[1];
-        console.log("size", planets[0]["distance"]);
-
-        planets[0]["speed"] = parseFloat(attributes[2]);
-        console.log("speed", planets[0]["speed"]);
-
-        planets[0]["colour"] = attributes[3];
-        console.log("colour", planets[0]["colour"]);
-
+        var i, j = 0;
+        for(i=0; i<5; i++){
+          planets[i]["distance"] = attributes[j];
+          planets[i]["size"] = attributes[j+1];
+          planets[i]["speed"] = parseFloat(attributes[j+2]);
+          planets[i]["colour"] = attributes[j+3];
+          j += 4;
+        }
         system();
      }
    }
@@ -102,58 +97,92 @@ function system()  {
   //		added planet    						//
   ///////////////////////////////////
 
-  var venusangle = 0;
-  var earthangle = 0;
-  var marsangle = 0;
+  var oneAngle = 0;
+  var twoAngle = 0;
+  var threeAngle = 0;
+  var fourAngle = 0;
+  var fiveAngle = 0;
 
   //Jupiter already allows for change of texture
   var jupiter	= THREEx.Planets.createJupiter(planets[0]["colour"]);
 
-  var venus	= THREEx.Planets.createVenus();
-  venus.scale.x = planets[0]["size"];
-  venus.scale.y = planets[0]["size"];
-  venus.scale.z = planets[0]["size"];
-  venus.position.x = 0;
-  venus.position.y = 0;
-  venus.position.z = 0;
+  var one	= THREEx.Planets.createJupiter(planets[0]["colour"]);
+  console.log("one", planets[0]["size"]);
+  one.scale.x = planets[0]["size"];
+  one.scale.y = planets[0]["size"];
+  one.scale.z = planets[0]["size"];
+  one.position.x = 0;
+  one.position.y = 0;
+  one.position.z = 0;
 
-  var mars = THREEx.Planets.createMars();
-  mars.scale.x = 0.25;
-  mars.scale.y = 0.25;
-  mars.scale.z = 0.25;
-  mars.position.x = 0;
-  mars.position.y = 0;
-  mars.position.z = 0;
+  var two = THREEx.Planets.createJupiter(planets[1]["colour"]);
+  console.log("two", planets[1]["size"]);
+  two.scale.x = planets[1]["size"];
+  two.scale.y = planets[1]["size"];
+  two.scale.z = planets[1]["size"];
+  two.position.x = 0;
+  two.position.y = 0;
+  two.position.z = 0;
 
-  var earth	= THREEx.Planets.createEarth();
-  earth.scale.x = 0.4;
-  earth.scale.y = 0.4;
-  earth.scale.z = 0.4;
-  earth.position.x = 0;
-  earth.position.y = 0;
-  earth.position.z = 0;
+  var three	= THREEx.Planets.createJupiter(planets[2]["colour"]);
+  console.log("three", planets[2]["size"]);
+  three.scale.x = planets[2]["size"];
+  three.scale.y = planets[2]["size"];
+  three.scale.z = planets[2]["size"];
+  three.position.x = 0;
+  three.position.y = 0;
+  three.position.z = 0;
 
-	scene.add(venus);
-	scene.add(mars);
-	scene.add(jupiter);
-  scene.add(earth);
+  var four	= THREEx.Planets.createJupiter(planets[3]["colour"]);
+  console.log("four", planets[3]["size"]);
+  four.scale.x = planets[3]["size"];
+  four.scale.y = planets[3]["size"];
+  four.scale.z = planets[3]["size"];
+  four.position.x = 0;
+  four.position.y = 0;
+  four.position.z = 0;
+
+  var five	= THREEx.Planets.createJupiter(planets[4]["colour"]);
+  console.log("five", planets[4]["size"]);
+  five.scale.x = planets[4]["size"];
+  five.scale.y = planets[4]["size"];
+  five.scale.z = planets[4]["size"];
+  five.position.x = 0;
+  five.position.y = 0;
+  five.position.z = 0;
+
+  scene.add(jupiter);
+	scene.add(one);
+	scene.add(two);
+  scene.add(three);
+  scene.add(four);
+  scene.add(five);
 
   updateFcts.push(function(delta, now){
-		venus.rotation.x += 3 * delta;
-	  mars.rotation.x += 4 * delta;
+		one.rotation.x += 3 * delta;
+	  two.rotation.x += 3 * delta;
+    three.rotation.x += 3 * delta;
+    four.rotation.x += 3 * delta;
+    five.rotation.x += 3 * delta;
 	});
 
   updateFcts.push(function(){
-    venus.position.x = planets[0]["distance"] * Math.cos(venusangle * Math.PI / 180);
-    venus.position.y = planets[0]["distance"] * Math.sin(venusangle * Math.PI / 180);
-    mars.position.x = 2 * Math.cos(marsangle * Math.PI / 180);
-    mars.position.y = 2 * Math.sin(marsangle * Math.PI / 180);
-    earth.position.x = 3 * Math.cos(earthangle * Math.PI / 180);
-    earth.position.y = 3 * Math.sin(earthangle * Math.PI / 180);
+    one.position.x = planets[0]["distance"] * Math.cos(oneAngle * Math.PI / 180);
+    one.position.y = planets[0]["distance"] * Math.sin(oneAngle * Math.PI / 180);
+    two.position.x = planets[1]["distance"] * Math.cos(twoAngle * Math.PI / 180);
+    two.position.y = planets[1]["distance"] * Math.sin(twoAngle * Math.PI / 180);
+    three.position.x = planets[2]["distance"] * Math.cos(threeAngle * Math.PI / 180);
+    three.position.y = planets[2]["distance"] * Math.sin(threeAngle * Math.PI / 180);
+    four.position.x = planets[3]["distance"] * Math.cos(fourAngle * Math.PI / 180);
+    four.position.y = planets[3]["distance"] * Math.sin(fourAngle * Math.PI / 180);
+    five.position.x = planets[4]["distance"] * Math.cos(fiveAngle * Math.PI / 180);
+    five.position.y = planets[4]["distance"] * Math.sin(fiveAngle * Math.PI / 180);
 
-    venusangle += planets[0]["speed"];
-    earthangle += 0.5;
-    marsangle += 0.3;
+    oneAngle += planets[0]["speed"];
+    twoAngle += planets[1]["speed"];
+    threeAngle += planets[2]["speed"];
+    fourAngle += planets[3]["speed"];
+    fiveAngle += planets[4]["speed"];
   });
 
 	/////////////////////////////////////

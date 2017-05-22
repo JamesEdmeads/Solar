@@ -7,7 +7,7 @@ CREATE TABLE system (
 
 CREATE TABLE planet (
   -- by cnt++
-  id INTEGER PRIMARY KEY,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   distance float NOT NULL,
   p_size float NOT NULL,
   speed float NOT NULL,
