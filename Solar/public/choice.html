@@ -13,10 +13,12 @@
   <link rel="stylesheet" media="screen and (max-width : 600px) "
        href="stylesheets/chphone.css" type="text/css" ></link>
 
+
 </head>
 <body>
   <script src = "js/choice.js"></script>
   <script src = "noUiSlider/nouislider.min.js"></script>
+  <h1 id = "title">SOLARBUILDER</h1>
   <form id = "All" method="post" action="http://localhost:8080/save" >
     <div id = "orbitDistance">Orbit Distance</div>
     <div id = "orbitDisSlide">
@@ -53,6 +55,8 @@
     <input id="Go" type="submit" value="Send"/>
 
   </form>
+  
+  <img id = "progress" ></img>
 
   <button id = "orbitHelp">?</button>
 

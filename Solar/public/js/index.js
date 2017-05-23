@@ -1,7 +1,7 @@
 "use strict";
 
 //On startup, loads values from server. NOTE edge case access without preloading?
-window.onload = fetchCookie();
+addEventListener('load', fetchCookie);
 
 //2D array holds the values for each planet
 var planetNum = 5;
@@ -43,9 +43,16 @@ function server(){
      }
 }
 
+function link()  {
+  window.location.href = "http://localhost:8080/landing.html";
+
+}
+
 //The SolarSystem function
 function system()  {
 
+  document.getElementById('title').addEventListener('click', link);
+  
   var renderer	= new THREE.WebGLRenderer({
 		antialias	: true
 	});

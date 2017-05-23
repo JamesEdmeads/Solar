@@ -37,9 +37,10 @@ function goChoice()  {
 }
 
 function setUp()  {
-  alert("This site uses cookies to save your solar system, or something like this");
+ 
 
   if (cookie.length < 1)  {
+    alert("This site uses cookies to save your solar system, or something like this");
     cpyCookie = -1;
   }
 

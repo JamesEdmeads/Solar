@@ -13,6 +13,20 @@ body {
   text-align : center;
 }
 
+#progress  {
+  position : absolute;
+  top : 50px;
+  left: 47.5%;
+  
+
+}
+
+#title  {
+  color : white;
+  position : absolute;
+  left : 40px;
+}
+
 p  {
   font-size : 0.8em;
 }

@@ -95,13 +95,35 @@ function setCount()  {
   var count = sessionStorage.getItem('cnt');
   count++;
   document.getElementById('planetCount').value = count;
-
+  
+  updatePicture(count);
+  
   if(count == 5){
     count = 0;
   }
 
   sessionStorage.setItem('cnt', count);
   document.getElementById('user').value = document.cookie;
+  
+
+
+}
+
+function updatePicture(count)  {
+
+  var path = "images/progress";
+  
+  path = path+count+".png";
+
+  document.getElementById('progress').src = path;
+
+
+}
+
+function link()  {
+
+  sessionStorage.setItem('cnt', 0);
+  window.location.href = "http://localhost:8080/landing.html";
 
 }
 
@@ -128,6 +150,7 @@ function setUp() {
   var helpAll = [OrbHelp, ColourHelp, SizeHelp, SpeedHelp];
   var allFinish = [finish0, finish1, finish2, finish3];
   Col.addEventListener('change', ColourSel);
+  document.getElementById('title').addEventListener('click', link);
 
   createSliders(all);
   actionSliders(all);
