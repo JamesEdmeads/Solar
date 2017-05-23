@@ -1,11 +1,11 @@
 "use strict"
 
 var cookie = document.cookie;
-var cpyCookie = cookie;
+var cpyCookie = (' '+cookie).slice(1);
 
 function show()  {
   //to be ammended depending on what server returns
-  if (cookie == cpyCookie) {
+  if (document.cookie == cpyCookie) {
     document.getElementById('login').style.display = 'block';
   }
   document.getElementById('choosePlanet').style.display = "block";
