@@ -93,12 +93,15 @@ function ColourSel()  {
 function setCount()  {
 
   var count = sessionStorage.getItem('cnt');
-  if(count > 5)  {
-    sessionStorage.clear();
-  }
   count++;
   document.getElementById('planetCount').value = count;
+
+  if(count == 5){
+    count = 0;
+  }
+
   sessionStorage.setItem('cnt', count);
+  document.getElementById('user').value = document.cookie;
 
 }
 

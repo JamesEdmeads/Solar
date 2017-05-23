@@ -71,8 +71,8 @@ function handle(request, response) {
         // splits the usefull data into an array
         function end() {
           var params = QS.parse(body);
-          console.log(params.distance, params.size, params.speed, params.colour);
-          dbmethod.insert(params.distance, params.size, params.speed, params.colour, 1); //TODO userID;
+          console.log(params.count, params.distance, params.size, params.speed, params.colour, params.user);
+          dbmethod.insert(params.count, params.distance, params.size, params.speed, params.colour, params.user);
           parameters = "";
           parameters = parameters + params.distance + "&";
           parameters = parameters + params.size + "&";
@@ -80,6 +80,7 @@ function handle(request, response) {
           parameters = parameters + params.colour;
 
           // added count from choice.js as params.count and set the 5 check to this
+          console.log("COUNT----------------------------------", params.count);
           if(params.count >= 5){
             renderHTML("./public/solar.html", response, type);
           }else{
@@ -89,8 +90,8 @@ function handle(request, response) {
       break;
 
       case "/load":
-        //NOTE hardcode 1 for now.
-        dbmethod.getplanet(execute, 1);
+        console.log("TESTING_________________________");
+        dbmethod.getplanet(execute, requestURL[1]);
 
         function execute(result){
           var textTypeHeader = { "Content-Type": "text/plain" };

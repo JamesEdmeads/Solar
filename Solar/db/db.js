@@ -55,10 +55,24 @@ function addUser(id)  {
 
 module.exports = {
   //TODO maybe callback?
-  insert: function (dist, p_size, speed, color, user)  {
-    var ps = db.prepare("insert into planet (distance, p_size, speed, colour, sys_id) values(?,?,?,?,?)");
-    ps.run(dist, p_size, speed, color, user);
-    ps.finalize();
+  insert: function (count, dist, p_size, speed, color, user)  {
+    console.log("JUST IN case________________________");
+    var ps1 = db.prepare("select id from planet where sys_id = ? and count = ?");
+    ps1.get(user, count, ready);
+
+    function ready(err, row){
+      try{
+        var ps3 = db.prepare("update planet set count = ?, distance = ?, p_size = ?, speed = ?, colour = ?, sys_id = ? where id = ?");
+        ps3.run(count, dist, p_size, speed, color, user, row["id"]);
+        ps3.finalize();
+        console.log("TRY________________________");
+      }catch(err){
+        var ps2 = db.prepare("insert into planet (count, distance, p_size, speed, colour, sys_id) values(?,?,?,?,?,?)");
+        ps2.run(count, dist, p_size, speed, color, user);
+        ps2.finalize();
+        console.log("CATCH________________________");
+      }
+    }
 
     /*test functions - all working
     updateSpeed(5, 1);

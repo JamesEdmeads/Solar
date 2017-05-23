@@ -1,7 +1,7 @@
 "use strict";
 
 //On startup, loads values from server. NOTE edge case access without preloading?
-window.onload = server();
+window.onload = fetchCookie();
 
 //2D array holds the values for each planet
 var planetNum = 5;
@@ -18,15 +18,17 @@ function createArray(planetNum){
   return planets;
 }
 
+function fetchCookie(){
+  var q = new XMLHttpRequest();
+  q.open("GET", "load?" + document.cookie, true);
+  q.onreadystatechange = server;
+  q.send();
+}
+
 //Gets data from the server
 function server(){
-
-  var xmlhttp = new XMLHttpRequest();
-  var string;
-  xmlhttp.open("GET","http://localhost:8080/load", true);
-  xmlhttp.onreadystatechange=function(){
-     if (xmlhttp.readyState==4 && xmlhttp.status==200){
-        string=xmlhttp.responseText;
+     if (this.readyState==4 && this.status==200){
+        var string=this.responseText;
         console.log("STRING", string);
         var attributes = string.split("&");
         var i, j = 0;
@@ -39,9 +41,6 @@ function server(){
         }
         system();
      }
-   }
-   xmlhttp.send();
-
 }
 
 //The SolarSystem function
