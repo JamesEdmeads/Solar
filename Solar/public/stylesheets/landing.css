@@ -30,7 +30,7 @@ h1  {
   text-shadow: 2px 2px 8px #000000;
 }
 
-form  {
+#buttonChoice  {
   font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
   position : absolute;
   top : 400px;
@@ -54,7 +54,7 @@ button {
 
 #choosePlanet  {
   position : relative;
-  top : 30px;
+  top : 100px;
   padding: 8px 25px;
 
 }

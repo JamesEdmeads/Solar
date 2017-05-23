@@ -21,9 +21,19 @@ function fetchCookie(){
 
 function insertCookie(){
   if (this.readyState == 4 && this.status == 200) {
-          cookie = this.responseText;
+          document.cookie = this.responseText;
           show();
      }
+}
+
+function goSolar()  {
+  window.location.href = "http://localhost:8080/solar.html";
+
+}
+
+function goChoice()  {
+  console.log("here");
+  window.location.href = "http://localhost:8080/choice.html";
 }
 
 function setUp()  {
@@ -34,6 +44,9 @@ function setUp()  {
   }
 
   fetchCookie();
+  
+  document.getElementById("login").addEventListener('click', goSolar);
+  document.getElementById("choosePlanet").addEventListener('click', goChoice);
 }
 
 addEventListener('load', setUp);
