@@ -19,9 +19,17 @@
 <h1>SOLARBUILDER</h1>
 <body>
   <script src = "js/landing.js"></script>
-  <form action="choice.html">
+
+  <form action="http://google.com">
+    <input type="submit" value="Go to Google" />
+  </form>
+
+  <form action="https://localhost:8080/choice">
+    <button id="choosePlanet" type ="submit" value = "">Choose Planets</button>
+  </form>
+
+  <form action="https://localhost:8080/choice">
     <button id="login" type="submit">Show Solar System</button>
-    <button id="choosePlanet" type ="submit">Choose Planets</button>
   </form>
   <div id = "solarsystem">
     <h3>SolarSystem</h3>
@@ -37,9 +45,7 @@
         <p>website that let's you be the god of your own solar system</p>
       </div>
   </div>
-  <form id = "form0" method = "post" action="http://localhost:8080/check">
-    <input type = "hidden" name = "input0" value ="-1" id = "checkBox"></input>
-  </form>
+
 </body>
 
 </html>

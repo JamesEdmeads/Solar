@@ -41,38 +41,21 @@ function handle(request, response) {
     if (url.endsWith("/")) url = url + "index.html";
     if (isBanned(url)) return fail(response, NotFound, "URL has been banned");
     var type = findType(url);
-    console.log("requests:", url);
 
-// Checks if user already create a system, if not returns new uid.
-function checkUID(id){
-  //TODO
-}
-
-// The main tree of the website:
-    switch (url) {
+    //NOTE split the url up
+    var requestURL = url.split("?");
+    // The main tree of the website:
+    switch (requestURL[0]) {
 
       //Landing
       case "/check":
-        // what happens at the back - get the data
-        request.on('data', add1);
-        request.on('end', end1);
-
-        // places all the data in one large string
-        var body = "";
-        function add1(chunk) { body = body + chunk.toString(); }
-
-        function end1(){
-          var params = QS.parse(body);
-          console.log("TEST_________", params.input0);
-          
-          dbmethod.checkUser(params.input0, execute);
+          dbmethod.checkUser(requestURL[1], execute);
 
           function execute(result){
             var textTypeHeader = { "Content-Type": "text/plain" };
             response.writeHead(200, textTypeHeader);
             response.end(result);
           }
-        }
 
       break;
 
