@@ -53,14 +53,27 @@ function checkUID(id){
 
       //Landing
       case "/check":
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!RECIEVED!!!!!!!!!!!!!!!!!!!!!");
-        checkUser(id, execute);
+        // what happens at the back - get the data
+        request.on('data', add1);
+        request.on('end', end1);
 
-        function execute(result){
-          var textTypeHeader = { "Content-Type": "text/plain" };
-          response.writeHead(200, textTypeHeader);
-          response.end(result);
+        // places all the data in one large string
+        var body = "";
+        function add1(chunk) { body = body + chunk.toString(); }
+
+        function end1(){
+          var params = QS.parse(body);
+          console.log("TEST_________", params.input0);
+          
+          dbmethod.checkUser(params.input0, execute);
+
+          function execute(result){
+            var textTypeHeader = { "Content-Type": "text/plain" };
+            response.writeHead(200, textTypeHeader);
+            response.end(result);
+          }
         }
+
       break;
 
       case "/save":
