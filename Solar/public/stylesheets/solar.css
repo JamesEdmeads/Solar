@@ -11,5 +11,7 @@ canvas  {
   position : absolute;
   left : 40px;
   z-index : 1;
+  cursor : pointer;
 
 }
+

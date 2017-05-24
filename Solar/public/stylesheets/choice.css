@@ -28,7 +28,9 @@ body {
   color : white;
   position : absolute;
   left : 40px;
+  cursor : pointer;
 }
+
 
 p  {
   font-size : 0.8em;
