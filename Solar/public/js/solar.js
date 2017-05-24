@@ -18,6 +18,9 @@ addEventListener('load', fetchCookie);
 var planetNum = 5;
 var planets = createArray(planetNum);
 
+
+var Sun;
+
 //Creates 2D array filled with zeros.
 function createArray(planetNum){
 
@@ -99,7 +102,7 @@ function createLight(scene)  {
 //adds sun then sets up and adds each planet to an array and the scene
 function addPlanets(scene)  {
 
-    var Sun = THREEx.Planets.createSun();
+    Sun = THREEx.Planets.createSun();
     scene.add(Sun);
   
     var solarSystem = []
@@ -173,8 +176,10 @@ function system()  {
  	//update functoions
     updateFcts.push(function(delta, now){
         for(var i = 0; i < planetNum; i++)  {
-        systemPlanets[i].rotation.x += 3 * delta;
+        systemPlanets[i].rotation.y += 3 * delta;
+
         }
+        Sun.rotation.y += 1 * delta;
 	});
 
     updateFcts.push(updatePlanets);
