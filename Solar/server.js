@@ -49,12 +49,16 @@ function handle(request, response) {
 
       //Landing
       case "/check":
-          dbmethod.checkUser(requestURL[1], execute);
+          if(requestURL[1] == null){
+            renderHTML("./public/index.html", response, type);
+          }else{
+            dbmethod.checkUser(requestURL[1], execute);
 
-          function execute(result){
-            var textTypeHeader = { "Content-Type": "text/plain" };
-            response.writeHead(200, textTypeHeader);
-            response.end(result);
+            function execute(result){
+              var textTypeHeader = { "Content-Type": "text/plain" };
+              response.writeHead(200, textTypeHeader);
+              response.end(result);
+            }
           }
 
       break;
@@ -94,10 +98,14 @@ function handle(request, response) {
         dbmethod.getplanet(execute, requestURL[1]);
 
         function execute(result){
-          var textTypeHeader = { "Content-Type": "text/plain" };
-          response.writeHead(200, textTypeHeader);
-          console.log(result);
-          response.end(result);
+          if(result == "fail"){
+            renderHTML("./public/index.html", response, type);
+          }else{
+            var textTypeHeader = { "Content-Type": "text/plain" };
+            response.writeHead(200, textTypeHeader);
+            console.log(result);
+            response.end(result);
+          }
         }
       break;
 

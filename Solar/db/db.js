@@ -89,12 +89,16 @@ module.exports = {
 
     function ready(err, rows){
       var result = "";
-      var i;
-      for(i = 0; i<5; i++){
-        result = result + rows[i]["distance"] + "&";
-        result = result + rows[i]["p_size"] + "&";
-        result = result + rows[i]["speed"] + "&";
-        result = result + rows[i]["colour"] + "&";
+      try{
+        var i;
+        for(i = 0; i<5; i++){
+          result = result + rows[i]["distance"] + "&";
+          result = result + rows[i]["p_size"] + "&";
+          result = result + rows[i]["speed"] + "&";
+          result = result + rows[i]["colour"] + "&";
+        }
+      }catch(err){
+        result = "fail";
       }
       execute(result);
     }
@@ -102,13 +106,13 @@ module.exports = {
 
   //Checks if user exists if no user generates a new user, returns id.
   checkUser: function(id, execute){
-    var ps = db.prepare("select id from system where id = ?");
-    ps.get(id, ready);
+    var ps = db.prepare("select id, (select count(id) from planet where sys_id = ?) as cnt from system where id = ?");
+    ps.get(id, id, ready);
 
     function ready(err, row){
       var result = "";
       try{
-        execute(result + row.id);
+        execute(result + row.id + "&" + row.cnt);
         console.log("USER EXISTS");
       }catch(err){
         console.log("DOES NOT EXIST");

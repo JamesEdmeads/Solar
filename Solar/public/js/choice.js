@@ -90,29 +90,35 @@ function ColourSel()  {
 }
 
 //updates session count and sets in the html form
+//NOTE +1 is a nono
 function setCount()  {
 
   var count = sessionStorage.getItem('cnt');
   count++;
   document.getElementById('planetCount').value = count;
-  
+
   updatePicture(count);
-  
+
+  //NOTE set userID for the db on serverside
+  document.getElementById('user').value = document.cookie;
+}
+
+function inCount() {
+  console.log("TESTifTriggered.");
+  var count = sessionStorage.getItem('cnt');
+  count++;
+
   if(count == 5){
     count = 0;
   }
 
   sessionStorage.setItem('cnt', count);
-  document.getElementById('user').value = document.cookie;
-  
-
-
 }
 
 function updatePicture(count)  {
 
   var path = "images/progress";
-  
+
   path = path+count+".png";
 
   document.getElementById('progress').src = path;
@@ -123,7 +129,7 @@ function updatePicture(count)  {
 function link()  {
 
   sessionStorage.setItem('cnt', 0);
-  window.location.href = "http://localhost:8080/landing.html";
+  window.location.href = "http://localhost:8080/index.html";
 
 }
 
@@ -159,6 +165,8 @@ function setUp() {
 
   //new to set count on form
   setCount();
+
+  document.getElementById('Go').addEventListener('click', inCount);
 
 }
 

@@ -1,41 +1,43 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
 <head>
+  <title>Solarbuilder</title>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- favicon -->
   <link rel="icon" type="image/png" href="images/favimage.png"></link>
-  <h2 class = "header">SolarBuilder</h2>
-  <script src='three/three.min.js'></script>
-  <script src='three/threex.planets.js'></script>
-  <script src='three/orbitcontrols.js'></script>
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"/>
+  <link rel="icon" type="image/jpeg" href="stylesheets/favImage.jpeg"/>
+  <link rel="stylesheet" media="screen"  href="stylesheets/index.css" type="text/css" />
+  <link rel="stylesheet" media="screen and (min-width: 600px) and (max-width : 768px) "
+     href="stylesheets/indextablet.css" type="text/css" />
+  <link rel="stylesheet" media="screen and (max-width : 600px) "
+     href="stylesheets/indexphone.css" type="text/css" />
+
 
 </head>
+
+<h1>SOLARBUILDER</h1>
 <body>
-
-  <p> Set size: </p>
-  <select id="size">
-    <option id = "size1">1</option>
-    <option id = "size2">2</option>
-    <option id = "size3">3</option>
-  </select>
-
-  <p> Set speed: </p>
-  <select id="speed">
-    <option id = "speed1">1</option>
-    <option id = "speed2">2</option>
-    <option id = "speed3">3</option>
-  </select>
-
-  <p> Set distance: </p>
-  <select id="distance">
-    <option id = "distance1">1</option>
-    <option id = "distance2">2</option>
-    <option id = "distance3">3</option>
-  </select>
-
-  <p> Run simulation: </p>
-  <a href="solar.html"><button onclick="storeData()">Start</button></a>
-
-  <script src="js/index.js"></script>
+  <script src = "js/index.js"></script>
+  <div id = "buttonChoice">
+    <button id="choosePlanet" type ="submit" value = "">Choose Planets</button>
+    <button id="login" type="submit">Show Solar System</button>
+  </div>
+  <div id = "solarsystem">
+    <h3>SolarSystem</h3>
+      <p id = "solnounanddef"><em>noun</em>ASTRONOMY</p>
+      <div id= "solarDef">
+          <p>the collection of eight planets and their moons in the orbit round the sun, together with smaller bodies in the form of asteroids, meteoroids, and comets.</p>
+      </div>
+  </div>
+  <div id = "solarbuilder">
+    <h3>SolarBuilder</h3>
+      <p id = "Buildnounanddef"><em>noun</em>ASTRONOMY</p>
+      <div id= "BuildDef">
+        <p>website that let's you be the god of your own solar system</p>
+      </div>
+  </div>
 
 </body>
+
 </html>
