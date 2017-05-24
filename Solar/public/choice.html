@@ -6,7 +6,9 @@
 
   <!-- favicon -->
   <link rel="icon" type="image/png" href="images/favimage.png"></link>
+  <!-- font -->
   <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"></link>
+  <!-- stylesheets -->
   <link href="nouislider/nouislider.min.css" rel="stylesheet"></link>
   <link href="stylesheets/choice.css"  media="screen"
        rel="stylesheet" type="text/css" ></link>
@@ -15,34 +17,42 @@
   <link rel="stylesheet" media="screen and (max-width : 600px) "
        href="stylesheets/chphone.css" type="text/css" ></link>
 
-
 </head>
+
 <body>
+  <!-- scripts -->
   <script src = "js/choice.js"></script>
   <script src = "noUiSlider/nouislider.min.js"></script>
+  
   <h1 id = "title">SOLARBUILDER</h1>
+  
+  <!-- sliders and hidden form -->
   <form id = "All" method="post" action="http://localhost:8080/save" >
+    <!-- planet distance -->
     <div id = "orbitDistance">Orbit Distance</div>
     <div id = "orbitDisSlide">
-    <input type="hidden" name = "distance" value ="0" id="orbdis"></input>
-    </div>
+        <input type="hidden" name = "distance" value ="0" id="orbdis"></input>
+    </div> 
     <p id = "close">close</p>
     <p id = "far">far</p>
 
-    <div id = "planetSize">Size of Planet</div>
+    <!-- planetSize -->
+    <div id = "planetSize">Size of Planet</div>    
     <div id = "planetSizeSlide">
-    <input type="hidden" name = "size" value ="0" id="plansize"></input>
+        <input type="hidden" name = "size" value ="0" id="plansize"></input>
     </div>
     <p id = "small">small</p>
     <p id = "large">large</p>
 
+    <!-- planet speed -->
     <div id = "speedOrbit">Speed of Planet</div>
     <div id = "speedSlide">
-    <input type="hidden" name = "speed" value ="0" id="spchange"></input>
+        <input type="hidden" name = "speed" value ="0" id="spchange"></input>
     </div>
     <p id = "slow">slow</p>
     <p id = "fast">fast</p>
 
+    <!-- planet colour -->
     <div id = "colour">Colour</div>
     <div id = "colorSelect" method="get" class = "table">
       <input type = "hidden" name = "colour" value ="black" id="col"></input>
@@ -51,15 +61,19 @@
         <option value = "venus">venus</option>
       </select>
     </div>
-    <!-- added new part to form to send count back-->
+
+    <!-- hidden parts of form for planet number and user -->
     <input type = "hidden" name = "count" value = "1" id = "planetCount"></input>
     <input type = "hidden" name = "user" value = "-1" id = "user"></input>
-    <input id="Go" type="submit" value="Send"/>
+   
+    <!-- form send button -->
+    <input id="Go" type="submit" value="Next Planet"/>
 
   </form>
   
   <img id = "progress" ></img>
 
+  <!-- modals and buttons for help -->
   <button id = "orbitHelp">?</button>
 
   <div id = "OhelpModal" class="modal">
@@ -95,10 +109,6 @@
         <p>Select the colour of your planet</p>
     </div>
   </div>
-
-
-
-
 
 </body>
 

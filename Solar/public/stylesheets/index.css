@@ -112,3 +112,38 @@ h3  {
   width : 75%;
 
 }
+
+#CookieModal  {
+    position : absolute;
+    top : 750px;
+    width : 30%;
+    left : 36%;
+    right : 35%;
+}
+
+.modal-content {
+      font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
+      font-size : 20px;
+      background-color: white;
+      margin: auto;
+      padding: 10px;
+      border: 1px solid #888;
+      width: 80%;
+      display : none;
+}
+
+#X  {
+   
+    color : LightGrey;
+    float: right;
+    font-size : 18px;
+
+}
+
+#X:hover,
+#X:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+

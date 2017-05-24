@@ -5,24 +5,30 @@
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
   <!-- favicon -->
   <link rel="icon" type="image/png" href="images/favimage.png"></link>
+  <!-- font -->
   <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"/>
-  <link rel="icon" type="image/jpeg" href="stylesheets/favImage.jpeg"/>
+  
+  <!-- stylesheets -->
   <link rel="stylesheet" media="screen"  href="stylesheets/index.css" type="text/css" />
   <link rel="stylesheet" media="screen and (min-width: 600px) and (max-width : 768px) "
      href="stylesheets/indextablet.css" type="text/css" />
   <link rel="stylesheet" media="screen and (max-width : 600px) "
      href="stylesheets/indexphone.css" type="text/css" />
 
-
 </head>
 
 <h1>SOLARBUILDER</h1>
+
 <body>
   <script src = "js/index.js"></script>
+  
+  <!-- buttons for user navigation -->
   <div id = "buttonChoice">
     <button id="choosePlanet" type ="submit" value = "">Choose Planets</button>
     <button id="login" type="submit">Show Solar System</button>
   </div>
+  
+  <!-- main test on page -->
   <div id = "solarsystem">
     <h3>SolarSystem</h3>
       <p id = "solnounanddef"><em>noun</em>ASTRONOMY</p>
@@ -30,12 +36,21 @@
           <p>the collection of eight planets and their moons in the orbit round the sun, together with smaller bodies in the form of asteroids, meteoroids, and comets.</p>
       </div>
   </div>
+  
   <div id = "solarbuilder">
     <h3>SolarBuilder</h3>
       <p id = "Buildnounanddef"><em>noun</em>ASTRONOMY</p>
       <div id= "BuildDef">
         <p>website that let's you be the god of your own solar system</p>
       </div>
+  </div>
+  
+  <!-- modal for cookie warning -->
+  <div id = "CookieModal" class="modal">
+    <div id = "modContent" class="modal-content" >
+      <span id = "X">X</span>
+        <p>This site uses cookies to save your solar system</p>
+    </div>
   </div>
 
 </body>
