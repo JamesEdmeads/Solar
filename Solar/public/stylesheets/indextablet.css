@@ -1,0 +1,21 @@
+/*for tablets*/
+
+body {
+  background-size : contain;
+}
+
+button {
+  width : 50%;
+}
+
+#solarsystem  {
+  left : 5%;
+  width : 45%; 
+}
+
+#solarbuilder  {
+  width : 45%; 
+}
+
+
+
