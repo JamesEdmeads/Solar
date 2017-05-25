@@ -108,7 +108,7 @@ function addPlanets(scene)  {
     var solarSystem = []
 
     for(var i = 0; i < planetNum; i++)  {
-        solarSystem[i] = THREEx.Planets.createJupiter(planets[i]["colour"]);
+        solarSystem[i] = THREEx.Planets.createPlanet(planets[i]["colour"]);
         solarSystem[i].scale.x = planets[i]["size"];
         solarSystem[i].scale.y = planets[i]["size"];
         solarSystem[i].scale.z = planets[i]["size"];

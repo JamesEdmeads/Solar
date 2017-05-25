@@ -134,13 +134,9 @@ THREEx.Planets.createMars	= function(){
 	return mesh
 }
 
-THREEx.Planets.createJupiter	= function(test){
+THREEx.Planets.createJupiter	= function(){
 	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)
-	if( test == "black"){
-		var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/testplanet.jpg')
-	}else{
-		var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/jupitermap.jpg')
-	}
+	var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/jupitermap.jpg')
 
 	var material	= new THREE.MeshPhongMaterial({
 		map	: texture,
@@ -151,6 +147,18 @@ THREEx.Planets.createJupiter	= function(test){
 	return mesh
 }
 
+THREEx.Planets.createPlanet	= function(test){
+	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)
+	var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/'+ test + '.jpg')
+
+	var material	= new THREE.MeshPhongMaterial({
+		map	: texture,
+		bumpMap	: texture,
+		bumpScale: 0.02,
+	})
+	var mesh	= new THREE.Mesh(geometry, material)
+	return mesh
+}
 
 THREEx.Planets.createSaturn	= function(){
 	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)
