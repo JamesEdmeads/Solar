@@ -1,68 +1,76 @@
 /*for phones sized screens*/
 
 h1  {
-    font-size: 3em;
-    left : 10%;
-    width: 80%;
+  font-size: 3em;
+  left : 10%;
+  width: 80%;
 }
 
 form  {
-    top : 350px;
-    left: 20%;
+  top : 350px;
+  left: 20%;
 }
 
 /*definitions adjustments*/
 #solarsystem  {
-    left : 20%;
-    top : 75px;
-    width : 100%;
+  left : 20%;
+  top : 75px;
+  width : 100%;
 }
 
 #solarbuilder  {
-    left : 22%;
-    top : 230px;
-    width : 100%;
+  left : 22%;
+  top : 230px;
+  width : 100%;
 }
 
 #solnounanddef  {
-    top : 43px;
+  top : 43px;
 }
 
 #Buildnounanddef  {
-    top : 43px;
+  top : 43px;
 }
 
 #solarDef  {
-    top : 25px;
-    left: 5%;
-    width : 320px;
+  top : 25px;
+  left: 5%;
+  width : 320px;
 }
 
 /*button and tutorial text for button*/
 #buttonChoice  {
-    position : absolute;
-    top : 425px;
-    text-align : center;
-    left: 30%;
-    right : 0;
+  position : absolute;
+  top : 425px;
+  text-align : center;
+  left: 30%;
+  right : 0;
 }
 
 .tutorial  {
-    top : -30px;
-    left : -50px;
-    font-size : 1em;
+  top : -30px;
+  left : -50px;
+  font-size : 1em;
+}
+
+#login  {
+  top : 10px;
+}
+
+#choosePlanet  {
+  top : 10px;
 }
 
 button {
-    background-color: white;
-    width : 200px;
-    border: none;
-    color: black;
-    padding: 8px 14px;
-    text-decoration: none;
-    margin: 5px 2px;
-    cursor: pointer;
-    display : none;
+  background-color: white;
+  width : 200px;
+  border: none;
+  color: black;
+  padding: 8px 14px;
+  text-decoration: none;
+  margin: 5px 2px;
+  cursor: pointer;
+  display : none;
 }
 
 

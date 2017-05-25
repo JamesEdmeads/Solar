@@ -1,28 +1,35 @@
 /*for tablets szied screens*/
 
 body {
-    background-size : auto-cover;
+  background-size : auto-cover;
 }
 
 button {
-    width : 50%;
+  width : 50%;
 }
 
 .tutorial  {
-    left : -25px;
+  left : -25px;
 }
 
 #buttonChoice {
-    left : 25%;
+  left : 25%;
 }
 
 #solarsystem  {
-    left : 5%;
-    width : 45%; 
+  left : 5%;
+  width : 45%; 
+}
+#login {
+  left : 70px;
+}
+
+#choosePlanet{
+  left : 70px;
 }
 
 #solarbuilder  {
-    width : 45%; 
+  width : 45%; 
 }
 
 

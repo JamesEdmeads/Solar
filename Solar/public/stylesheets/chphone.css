@@ -1,24 +1,24 @@
 /*for phone sized screens : choice.html*/
 
 #All  {
-    top : 150px;
+  top : 150px;
 }
 
 #title  {
-    position : relative;
-    left : -3px;
+  position : relative;
+  left : -3px;
 }
 
 #progress  {
-    top:-7px;
-    left : 0%;
+  top:-7px;
+  left : 0%;
     
 }
 
 .noHead  {
-    position : relative;
-    top : -158px;
-    left  : 20px;
+  position : relative;
+  top : -158px;
+  left  : 20px;
 }
 
 #Go  {
@@ -28,9 +28,9 @@
 }
 
 select {
-    top : 0px;
-    left : 2%;
-    right : 0%;
+  top : 0px;
+  left : 2%;
+  right : 0%;
 }
 
 /* Modal Content */
@@ -45,7 +45,7 @@ select {
 }
 
 .help  {
-    left : 80%;
+  left : 80%;
 }
 
 #orbitHelp {
