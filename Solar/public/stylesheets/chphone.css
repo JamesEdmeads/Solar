@@ -1,121 +1,54 @@
-/*for phones*/
+/*for phone sized screens : choice.html*/
 
-#planetSizeSlide .noUi-base {
-  background: white;
+#All  {
+    top : 150px;
 }
 
-#orbitDisSlide .noUi-base {
-  background: white;
+#title  {
+    position : relative;
+    left : -3px;
 }
 
-#speedSlide .noUi-base {
-  background: white;
+#progress  {
+    top:-7px;
+    left : 0%;
+    
 }
 
-#orbitDistance  {
-  top : 50px;
-  right : 65%;
-}
-
-#orbitHelp  {
-  top : 55px;
-}
-
-#close  {
-  top : 65px;
-}
-
-#far  {
-  top : 65px;
-}
-
-#colour  {
-  top : 275px;
-  right : 65%;
-}
-
-#colourHelp  {
-  position : absolute;
-  top : 275px;
-}
-
-#planetSize  {
-  top : 200px;
-  right : 65%;
-}
-
-
-#sizeHelp  {
-  top : 205px;
-}
-
-#small, #large  {
-  top : 220px;
-}
-
-
-#speedOrbit  {
-  top : 130px;
-  right : 65%;
-}
-
-#speedHelp  {
-  top : 135px;
-}
-
-#slow, #fast  {
-  top : 145px;
-}
-
-
-#orbitDisSlide{
-  top: 55px;
-}
-
-
-#planetSizeSlide{
-  top: 205px;
-}
-
-#speedSlide{
-  top: 130px;
-}
-
-#colorSelect {
-
-  position : relative;
-  top : 275px;
-}
-
-select  {
-  width  :30%;
-  left : 2%;
+.noHead  {
+    position : relative;
+    top : -158px;
+    left  : 20px;
 }
 
 #Go  {
   position : absolute;
-  top : 350px;
+  top : 450px;
   left : 37%;
 }
 
-.modal {
-  width: 50%;
-  top : 50px;
+select {
+    top : 0px;
+    left : 2%;
+    right : 0%;
 }
 
 /* Modal Content */
+.modal {
+  width: 50%;
+  top : 150px;
+  left : 25%;
+}
+
 .modal-content {
-  padding: 20px;
+  padding: 10px;
 }
 
-#ColorHelpMod {
-  top : 275px;
+.help  {
+    left : 80%;
 }
 
-#SizeHelpMod  {
-  top : 200px;
+#ColorHelpMod, #SizeHelpMod, #SpeedHelpMod {
+  top : 150px;
 }
 
-#SpeedHelpMod  {
-  top : 130px;
-}

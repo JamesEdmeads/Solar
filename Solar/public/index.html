@@ -22,34 +22,33 @@
 <body>
   <script src = "js/index.js"></script>
   
-  <!-- buttons for user navigation -->
-  <div id = "buttonChoice">
-    <button id="choosePlanet" type ="submit" value = "">Choose Planets</button>
-    <button id="login" type="submit">Show Solar System</button>
-  </div>
+  <div class = "All">
   
-  <!-- main test on page -->
-  <div id = "solarsystem">
-    <h3>SolarSystem</h3>
-      <p id = "solnounanddef"><em>noun</em>ASTRONOMY</p>
-      <div id= "solarDef">
-          <p>the collection of eight planets and their moons in the orbit round the sun, together with smaller bodies in the form of asteroids, meteoroids, and comets.</p>
+      <div id = "solarsystem" class = "DefSection">
+        <h3 id = "systemHead">SolarSystem</h3>
+          <p id = "solnounanddef"><em>noun</em>ASTRONOMY</p>
+            <p id = "solarDef" class = "Def">the collection of eight planets and their moons in the orbit round the sun, together with smaller bodies in the form of asteroids, meteoroids, and comets.</p>
       </div>
-  </div>
+      
+      <div id = "solarbuilder" class = "DefSection">
+        <h3 id = "builderHead">SolarBuilder</h3>
+          <p id = "Buildnounanddef"><em>noun</em>ASTRONOMY</p>
+            <p class = "Def">website that let's you be the god of your own solar system</p>
+      </div>
+      
+        <!-- buttons for user navigation -->
+      <div id = "buttonChoice">
+        <p class = "tutorial">Build your Solar System by styling 5 planets:</p>
+        <button id="choosePlanet" type ="submit" value = "">Choose Planets</button>
+        <button id="login" type="submit">Show Solar System</button>
+      </div>
   
-  <div id = "solarbuilder">
-    <h3>SolarBuilder</h3>
-      <p id = "Buildnounanddef"><em>noun</em>ASTRONOMY</p>
-      <div id= "BuildDef">
-        <p>website that let's you be the god of your own solar system</p>
-      </div>
   </div>
   
   <!-- modal for cookie warning -->
   <div id = "CookieModal" class="modal">
     <div id = "modContent" class="modal-content" >
-      <span id = "X">X</span>
-        <p>This site uses cookies to save your solar system</p>
+        <p class = "cookieInfo">This site uses cookies to save your solar system.<span id = "X">X</span></p>
     </div>
   </div>
 

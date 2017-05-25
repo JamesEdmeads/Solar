@@ -1,23 +1,16 @@
-/*for desktop*/
+/*css sheet for main index page*/
 
-
+/*main body*/
 body {
   background-color : black;
   background-image: url("../images/background1.png");
   background-size : auto-cover;
   background-repeat : no-repeat;
   overflow-y : scroll;
+  font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
 }
 
-/*potential for adapting background images*/
-@media screen and (min-width: 2000px)  {
-  body  {
-    background-size : cover;
- }
-}
-
-
-
+/*solarBuilder header*/
 h1  {
   font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
   font-size: 5em;
@@ -30,17 +23,72 @@ h1  {
   text-shadow: 2px 2px 8px #000000;
 }
 
-#buttonChoice  {
-  font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
-  position : absolute;
-  top : 400px;
-  text-align : center;
-  left: 45%;
-  right : 35%;
+/*everything except header and modal content*/
+.All  {
+    color : white;
 }
 
+/*solar system and solar builder headers*/
+h3  {
+  font-size: 1.5em;
+  position : relative;
+  top: 5%;
+  left : 0%;
+}
+
+.DefSection  {
+  font-size: 1em;
+  position : relative;
+  top : 150px;
+  width : 30%;
+}
+
+#solarsystem  {
+  left : 25%;
+}
+
+#solarbuilder  {
+  position : absolute;
+  left : 55%;
+  top : 150px;
+
+}
+
+/*definition titles*/
+#solnounanddef  {
+  position:  absolute;
+  top : 25px;
+}
+
+#Buildnounanddef  {
+  position:  absolute;
+  top : 48px;
+}
+
+/*definitions*/
+
+.Def  {
+  font-size : 0.8em;
+  position : relative;
+  top: 0px;
+  left: 10%;
+  width : 75%;
+}
+
+
+/*tutorial line*/
+.tutorial {
+    position : absolute;
+    font-size : 1.25em;
+    font-weight : bold;
+    top : -25px;
+    left : -75px;
+
+}
+
+/*buttons*/
+
 button {
-  font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
   background-color: white;
   width : 200px;
   border: none;
@@ -50,6 +98,15 @@ button {
   margin: 5px 2px;
   cursor: pointer;
   display : none;
+  font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
+}
+
+#buttonChoice  {
+  position : relative;
+  top : 300px;
+  text-align : center;
+  left: 43%;
+  right : 35%;
 }
 
 #choosePlanet  {
@@ -59,90 +116,36 @@ button {
 
 }
 
-#solarsystem  {
-  font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
-  color: white;
-  font-size: 1em;
-  position : absolute;
-  left : 25%;
-  top : 150px;
-  width : 30%;
-}
-
-#solarbuilder  {
-  font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
-  color: white;
-  font-size: 1em;
-  position : absolute;
-  left : 55%;
-  top : 150px;
-  width : 30%;
-}
-
-h3  {
-  font-size: 1.5em;
-  position : absolute;
-  top: 5%;
-  left : 0%;
-}
-
-#solnounanddef  {
-  position:  absolute;
-  top : 45px;
-}
-
-#Buildnounanddef  {
-  position:  absolute;
-  top : 45px;
-}
-
-#solarDef  {
-  font-size : 0.8em;
-  position : relative;
-  top: 70px;
-  left: 10%;
-  width : 75%;
-}
-
-#BuildDef  {
-  font-size : 0.8em;
-  position : relative;
-  top:70px;
-  left: 10%;
-  width : 75%;
-
-}
-
-#CookieModal  {
-    position : absolute;
-    top : 750px;
-    width : 30%;
-    left : 36%;
-    right : 35%;
-}
-
+/*modal content*/
 .modal-content {
-      font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
-      font-size : 20px;
-      background-color: white;
-      margin: auto;
-      padding: 10px;
-      border: 1px solid #888;
-      width: 80%;
-      display : none;
+    font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
+    font-size : 14px;
+    background-color: rgba(0,0,0,0.5);
+    display : none;
+    position : absolute;
+    bottom : 0;
+    left : 0;
+    right : 20px;
+    width : 100%;
+}
+
+.cookieInfo  {
+    padding-left : 20px;
+    padding-top : 5px;
+    padding-bottom : 5px;
+    color : white;
 }
 
 #X  {
-   
     color : LightGrey;
-    float: right;
+    position : absolute;
+    right : 2%;
     font-size : 18px;
-
 }
 
 #X:hover,
 #X:focus {
-  color: #000;
+  color: white;
   text-decoration: none;
   cursor: pointer;
 }

@@ -12,15 +12,25 @@
 // Start the server: change the port to the default 80, if there are no
 // privilege issues and port number 80 isn't already in use.
 
-var http = require("http");
+var http = require("http"); // || require https?
 var QS = require("querystring");
 var fs = require("fs");
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var types, banned, parameters = "";
 var dbmethod = require("./db/db.js");
-var cnt = 1;
 start(8080);
 
+// Start the http service.  Accept only requests from localhost, for security.
+function start(port) {
+    types = defineTypes();
+    banned = [];
+    banUpperCase("./public/", "");
+    var service = http.createServer(handle);
+    service.listen(port, "localhost:8080"); //is this the solution
+    var address = "http://localhost";
+    if (port != 80) address = address + ":" + port;
+    //of ifport https one : do this - then all on one server?
+}
 // Start the http service.  Accept only requests from localhost, for security.
 function start(port) {
     types = defineTypes();
@@ -30,14 +40,12 @@ function start(port) {
     service.listen(port, "localhost");
     var address = "http://localhost";
     if (port != 80) address = address + ":" + port;
-    console.log("Server running at", address);
     dbmethod.cleanDB();
 }
 
 // Serve a request by delivering a file.
 function handle(request, response) {
     var url = request.url.toLowerCase();
-    console.log("url", url);
     if (url.endsWith("/")) url = url + "index.html";
     if (isBanned(url)) return fail(response, NotFound, "URL has been banned");
     var type = findType(url);
@@ -75,7 +83,6 @@ function handle(request, response) {
         // splits the usefull data into an array
         function end() {
           var params = QS.parse(body);
-          console.log(params.count, params.distance, params.size, params.speed, params.colour, params.user);
           dbmethod.insert(params.count, params.distance, params.size, params.speed, params.colour, params.user);
           parameters = "";
           parameters = parameters + params.distance + "&";
@@ -83,8 +90,6 @@ function handle(request, response) {
           parameters = parameters + params.speed + "&";
           parameters = parameters + params.colour;
 
-          // added count from choice.js as params.count and set the 5 check to this
-          console.log("COUNT----------------------------------", params.count);
           if(params.count >= 5){
             renderHTML("./public/solar.html", response, type);
           }else{
@@ -94,7 +99,6 @@ function handle(request, response) {
       break;
 
       case "/load":
-        console.log("TESTING_________________________");
         dbmethod.getplanet(execute, requestURL[1]);
 
         function execute(result){
@@ -103,14 +107,12 @@ function handle(request, response) {
           }else{
             var textTypeHeader = { "Content-Type": "text/plain" };
             response.writeHead(200, textTypeHeader);
-            console.log(result);
             response.end(result);
           }
         }
       break;
 
       default:
-        console.log("DEFAULT");
         if (type == null) return fail(response, BadType, "File type unsupported");
         var file = "./public" + url;
         renderHTML(file, response, type);

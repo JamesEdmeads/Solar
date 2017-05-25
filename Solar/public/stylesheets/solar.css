@@ -1,3 +1,5 @@
+/*for main solar.html page*/
+
 canvas  {
   position : absolute;
   top : 0px;
@@ -6,12 +8,11 @@ canvas  {
 
 #title  {
   font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif !important;
-  text-shadow: 2px 2px 8px #000000;
+  text-shadow: 2px 2px 8px black;
   color : white;
   position : absolute;
   left : 40px;
   z-index : 1;
   cursor : pointer;
-
 }
 

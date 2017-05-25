@@ -74,7 +74,7 @@ function setUp()  {
         document.getElementById('modContent').style.display = "block";
         cpyCookie = -1;
     }
-
+    
     fetchCookie();
 
     document.getElementById("login").addEventListener('click', goSolar);
