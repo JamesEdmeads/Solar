@@ -12,7 +12,7 @@ each position on each frame
 "use strict";
 
 //On startup, loads values from server
-addEventListener('load', fetchCookie);
+addEventListener('load', fetchId);
 
 //2D array holds the values for each planet
 var planetNum = 5;
@@ -34,8 +34,8 @@ function createArray(planetNum){
 }
 
 
-//sends current user cookie to server
-function fetchCookie(){
+//sends current user id to server
+function fetchId(){
 
   var q = new XMLHttpRequest();
   q.open("GET", "load?" + sessionStorage.getItem('id'), true);

@@ -7,16 +7,15 @@
 
 "use strict"
 
-var cookie = sessionStorage.getItem('id');
-var cpyCookie = (' '+cookie).slice(1);
+var id = sessionStorage.getItem('id');
+var cpyId = (' '+id).slice(1);
 
 //sends copy of the cookie to the server for the database to check
-function fetchCookie(){
+function fetchId(){
 
     var q = new XMLHttpRequest();
-    q.open("GET", "check?" + cpyCookie, true);
-    q.onreadystatechange = insertCookie;
-    console.log("CPY-------------------COOKIE", cpyCookie);
+    q.open("GET", "check?" + cpyId, true);
+    q.onreadystatechange = insertId;
     q.send();
 
 }
@@ -24,10 +23,9 @@ function fetchCookie(){
 
 //deals with server reponse: sets document cookie and passes value of planet
 //count to show function
-function insertCookie(){
+function insertId(){
 
     if (this.readyState == 4 && this.status == 200) {
-        console.log("TEST");
         var response = this.responseText;
         var split = response.split("&");
         sessionStorage.setItem('id', split[0]);
@@ -39,7 +37,7 @@ function insertCookie(){
 //called when server has sent a reponse and changes what elements appear on screen
 function show(pNum)  {
 
-    if (sessionStorage.getItem('id') == cpyCookie && pNum >= 5) {
+    if (sessionStorage.getItem('id') == cpyId && pNum >= 5) {
         document.getElementById('login').style.display = 'block';
     }
     document.getElementById('choosePlanet').style.display = "block";
@@ -72,12 +70,12 @@ function close()  {
 //buttons
 function setUp()  {
 
-    if (cookie == null || cookie.length < 1)  {
+    if (id == null || id.length < 1)  {
         document.getElementById('modContent').style.display = "block";
-        cpyCookie = -1;
+        cpyId = -1;
     }
 
-    fetchCookie();
+    fetchId();
 
     document.getElementById("login").addEventListener('click', goSolar);
     document.getElementById("choosePlanet").addEventListener('click', goChoice);

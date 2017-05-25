@@ -92,8 +92,6 @@ function save(request, response, type){
     parameters = parameters + params.speed + "&";
     parameters = parameters + params.colour;
 
-    console.log("USER", params.user);
-
     // Only when all five planets are set, redirects to solar.html
     if(params.count >= 5){ renderHTML("./public/solar.html", response, type); }
     else{ renderHTML("./public/choice.html", response, type); }
@@ -137,11 +135,8 @@ function handleHTTPS(request, response) {
     if(isBanned(url)) return fail(response, NotFound, "URL has been banned");
     var type = findType(url, request);
 
-    console.log("URL-full", url);
     //Splits the url up, first is the requres second, after ? is user ID
     var requestURL = url.split("?");
-
-    console.log("URL", requestURL[1]);
 
     // The main tree of the website:
     switch (requestURL[0]) {
