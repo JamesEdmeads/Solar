@@ -48,6 +48,23 @@ select {
     left : 80%;
 }
 
+#orbitHelp {
+  top : 305px;
+}
+
+#speedHelp{
+  top : 380px;
+}
+
+#sizeHelp{
+  top : 455px;
+ 
+}
+
+#colourHelp {
+  top : 530px;
+}
+
 #ColorHelpMod, #SizeHelpMod, #SpeedHelpMod {
   top : 150px;
 }

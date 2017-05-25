@@ -5,7 +5,7 @@
 body {
   background-color : black;
   background-image: url("../images/background2.png");
-  background-size : cover;
+  background-size : auto-cover;
   /*for zoom - cover - for general auto-cover = positioning*/
   background-repeat : no-repeat;
   overflow-y : scroll;
@@ -97,8 +97,8 @@ p  {
 
 #colour  {
   position : absolute;
-  padding-left  : 2px;
-  padding-right : 55px;
+  padding-left  : 10px;
+  padding-right : 50px;
   top : 375px;
   right : 65%;
 }
@@ -195,20 +195,20 @@ select  {
 }
 
 #orbitHelp  {
-  top : 155px;
+  top : 162px;
 }
 
 #colourHelp  {
-  top : 375px;
+  top : 382px;
 }
 
 
 #sizeHelp  {
-  top : 305px;
+  top : 312px;
 }
 
 #speedHelp  {
-  top : 230px;
+  top : 237px;
 }
 
 /*modal content for each help button*/
