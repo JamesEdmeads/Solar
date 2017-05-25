@@ -12,149 +12,244 @@
 // Start the server: change the port to the default 80, if there are no
 // privilege issues and port number 80 isn't already in use.
 
-var http = require("http"); // || require https?
+var https = require("https");
+var http = require("http"); // http server that redirects to https
 var QS = require("querystring");
 var fs = require("fs");
+
+var options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+};
+
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var types, banned, parameters = "";
 var dbmethod = require("./db/db.js");
-start(8080);
+startHTTPS(8080);
+startHTTP(8090);
 
-// Start the http service.  Accept only requests from localhost, for security.
-function start(port) {
-    types = defineTypes();
-    banned = [];
-    banUpperCase("./public/", "");
-    var service = http.createServer(handle);
-    service.listen(port, "localhost:8080"); //is this the solution
-    var address = "http://localhost";
-    if (port != 80) address = address + ":" + port;
-    //of ifport https one : do this - then all on one server?
-}
-// Start the http service.  Accept only requests from localhost, for security.
-function start(port) {
-    types = defineTypes();
-    banned = [];
-    banUpperCase("./public/", "");
-    var service = http.createServer(handle);
+// http server redirecting to https
+function startHTTP(port) {
+    var service = http.createServer(handleHTTP);
     service.listen(port, "localhost");
     var address = "http://localhost";
     if (port != 80) address = address + ":" + port;
-    dbmethod.cleanDB();
+}
+
+// Redirects to https
+function handleHTTP(request, response) {
+    response.writeHead(302, {'Location': 'https://localhost:8080'+request.url});
+    response.end();
+}
+
+// Start the http service.  Accept only requests from localhost, for security.
+function startHTTPS(port) {
+
+    types = defineTypes();
+    banned = [];
+    banUpperCase("./public/", "");
+    var service = https.createServer(options, handleHTTPS);
+    service.listen(port, "localhost");
+    var address = "https://localhost";
+    if (port != 443) address = address + ":" + port;
+    console.log("Server running at", address);
+    dbmethod.cleanDB(); //On every restart of the server the db is cleaned
+
+}
+
+// Checks if user already exists and created a solar system
+// Generates new id if not
+function check(id, response, type){
+
+  if(id == null){ renderHTML("./public/index.html", response, type); }
+  else{ dbmethod.checkUser(id, execute);
+    function execute(result){
+      var textTypeHeader = { "Content-Type": "text/plain" };
+      response.writeHead(200, textTypeHeader);
+      response.end(result);
+    }
+  }
+}
+
+// Saves or updates planets attributes
+function save(request, response, type){
+
+  // gets the data
+  request.on('data', add);
+  request.on('end', end);
+
+  // places all the data in one large string
+  var body = "";
+  function add(chunk) { body = body + chunk.toString(); }
+
+  // splits the usefull data into an array
+  function end() {
+    var params = QS.parse(body);
+    dbmethod.insert(params.count, params.distance, params.size, params.speed, params.colour, params.user);
+    parameters = "";
+    parameters = parameters + params.distance + "&";
+    parameters = parameters + params.size + "&";
+    parameters = parameters + params.speed + "&";
+    parameters = parameters + params.colour;
+
+    console.log("USER", params.user);
+
+    // Only when all five planets are set, redirects to solar.html
+    if(params.count >= 5){ renderHTML("./public/solar.html", response, type); }
+    else{ renderHTML("./public/choice.html", response, type); }
+  }
+
+}
+
+// Loads the solar system if there is one
+function load(id, response, type){
+
+  dbmethod.getplanet(execute, id);
+
+  function execute(result){
+    if(result == "fail"){
+      renderHTML("./public/index.html", response, type);
+    }else{
+      var textTypeHeader = { "Content-Type": "text/plain" };
+      response.writeHead(200, textTypeHeader);
+      response.end(result);
+    }
+  }
+
+}
+
+// Loads the website if it is allowed
+function defaultReply(response, type, url){
+
+  if (type == null) return fail(response, BadType, "File type unsupported");
+  var file = "./public" + url;
+  renderHTML(file, response, type);
+
 }
 
 // Serve a request by delivering a file.
-function handle(request, response) {
-    var url = request.url.toLowerCase();
-    if (url.endsWith("/")) url = url + "index.html";
-    if (isBanned(url)) return fail(response, NotFound, "URL has been banned");
-    var type = findType(url);
+function handleHTTPS(request, response) {
 
-    //NOTE split the url up
+    var url = request.url.toLowerCase();
+
+    if (url.endsWith("/")) url = url + "index.html";
+    if(reject(url)) return fail(response, NotFound, "URL access refused");
+    if(isBanned(url)) return fail(response, NotFound, "URL has been banned");
+    var type = findType(url, request);
+
+    console.log("URL-full", url);
+    //Splits the url up, first is the requres second, after ? is user ID
     var requestURL = url.split("?");
+
+    console.log("URL", requestURL[1]);
+
     // The main tree of the website:
     switch (requestURL[0]) {
+      case "/check": check(requestURL[1], response, type); break;
+      case "/save": save(request, response, type); break;
+      case "/load": load(requestURL[1], response, type); break;
+      default: defaultReply(response, type, url);
+    }
 
-      //Landing
-      case "/check":
-          if(requestURL[1] == null){
-            renderHTML("./public/index.html", response, type);
-          }else{
-            dbmethod.checkUser(requestURL[1], execute);
-
-            function execute(result){
-              var textTypeHeader = { "Content-Type": "text/plain" };
-              response.writeHead(200, textTypeHeader);
-              response.end(result);
-            }
-          }
-
-      break;
-
-      case "/save":
-        // what happens at the back - get the data
-        request.on('data', add);
-        request.on('end', end);
-
-        // places all the data in one large string
-        var body = "";
-        function add(chunk) { body = body + chunk.toString(); }
-
-        // splits the usefull data into an array
-        function end() {
-          var params = QS.parse(body);
-          dbmethod.insert(params.count, params.distance, params.size, params.speed, params.colour, params.user);
-          parameters = "";
-          parameters = parameters + params.distance + "&";
-          parameters = parameters + params.size + "&";
-          parameters = parameters + params.speed + "&";
-          parameters = parameters + params.colour;
-
-          if(params.count >= 5){
-            renderHTML("./public/solar.html", response, type);
-          }else{
-            renderHTML("./public/choice.html", response, type);
-          }
-        }
-      break;
-
-      case "/load":
-        dbmethod.getplanet(execute, requestURL[1]);
-
-        function execute(result){
-          if(result == "fail"){
-            renderHTML("./public/index.html", response, type);
-          }else{
-            var textTypeHeader = { "Content-Type": "text/plain" };
-            response.writeHead(200, textTypeHeader);
-            response.end(result);
-          }
-        }
-      break;
-
-      default:
-        if (type == null) return fail(response, BadType, "File type unsupported");
-        var file = "./public" + url;
-        renderHTML(file, response, type);
-      }
 }
 
+// Delivers the website
 function renderHTML(file, response, type){
+
   fs.readFile(file, ready);
   function ready(err, content) { deliver(response, type, err, content); }
+
 }
 
-// Forbid any resources which shouldn't be delivered to the browser.
+// Forbids any resources which shouldn't be delivered to the browser.
 function isBanned(url) {
+
     for (var i=0; i<banned.length; i++) {
         var b = banned[i];
         if (url.startsWith(b)) return true;
     }
     return false;
+
 }
 
-// Find the content type to respond with, or undefined.
-function findType(url) {
-    var dot = url.lastIndexOf(".");
-    var extension = url.substring(dot + 1);
+// URL checking, rejects illegal/invalid/empty URLs
+function reject(url) {
+    var rejectable = ["/./", "/../", "//"];
+
+    if(!isValid(url) || url.length > 2000 || url[0] != "/"){
+      return true;
+    }
+
+    for (var i=0; i<rejectable.length; i++) {
+        if (url.indexOf(rejectable[i]) !== -1){
+          return true
+        };
+    }
+
+    return false;
+
+}
+
+// Checks if string is a valid ascii, addapted from:
+// https://stackoverflow.com/questions/14313183/javascript-regex-how-do-i-check-if-the-string-is-ascii-only
+function isValid(str){
+    if(typeof(str)!=='string'){
+        return false;
+    }
+    for(var i=0;i<str.length;i++){
+        if(str.charCodeAt(i)>127){
+            return false;
+        }
+    }
+    return true;
+}
+
+// Handles browsers which can not deal with xhtm+xml
+function findType(url, request) {
+
+    var header = request.headers.accept;
+    var accepts = header.split(",");
+    var extension;
+    var ntype = "application/xhtml+xml";
+    var otype = "text/html";
+
+    if (accepts.indexOf(otype) >= 0){
+
+      if (accepts.indexOf(ntype) >= 0){
+        var dot = url.lastIndexOf(".");
+        extension = url.substring(dot + 1);
+      }else{ extension = "html"; }
+
+    }else{
+
+      var dot = url.lastIndexOf(".");
+      extension = url.substring(dot + 1);
+
+    }
+
     return types[extension];
+
 }
 
 // Deliver the file that has been read in to the browser.
 function deliver(response, type, err, content) {
+
     if (err) return fail(response, NotFound, "File not found");
     var typeHeader = { "Content-Type": type };
     response.writeHead(OK, typeHeader);
     response.write(content);
     response.end();
+
 }
 
 // Give a minimal failure response to the browser
 function fail(response, code, text) {
+
     var textTypeHeader = { "Content-Type": "text/plain" };
     response.writeHead(code, textTypeHeader);
     response.write(text, "utf8");
     response.end();
+
 }
 
 // Check a folder for files/subfolders with non-lowercase names.  Add them to
@@ -165,6 +260,7 @@ function fail(response, code, text) {
 // non-lowercase name added while the server is running will get delivered, but
 // it will be detected and banned when the server is next restarted.
 function banUpperCase(root, folder) {
+
     var folderBit = 1 << 14;
     var names = fs.readdirSync(root + folder);
     for (var i=0; i<names.length; i++) {
@@ -175,17 +271,15 @@ function banUpperCase(root, folder) {
         if ((mode & folderBit) == 0) continue;
         banUpperCase(root, file);
     }
+
 }
 
-// The most common standard file extensions are supported, and html is
-// delivered as xhtml ("application/xhtml+xml").  Some common non-standard file
-// extensions are explicitly excluded.  This table is defined using a function
-// rather than just a global variable, because otherwise the table would have
-// to appear before calling start().  NOTE: for a more complete list, install
-// the mime module and adapt the list it provides.
+// Addapted to the types we use
 function defineTypes() {
+
     var types = {
-        html : "application/xhtml+xml",
+        html : "text/html",
+        xhtml : "application/xhtml+xml",
         css  : "text/css",
         js   : "application/javascript",
         png  : "image/png",
@@ -210,4 +304,5 @@ function defineTypes() {
         docx : undefined,      // non-standard, platform dependent, use .pdf
     }
     return types;
+
 }

@@ -3,8 +3,8 @@ https://github.com/jeromeetienne/threex.planets by Jerome Etienne
 The code has been adapted to work for our website and for styling purposes
 (full details of changes in report)
 
-This script on load sends the current user id to the server and retrieves 
-their solar system data from the database. It uses this data to create each 
+This script on load sends the current user id to the server and retrieves
+their solar system data from the database. It uses this data to create each
 planets and displays these via a scene. It then runs an animation loop to update
 each position on each frame
 */
@@ -24,7 +24,7 @@ var Sun;
 //Creates 2D array filled with zeros.
 function createArray(planetNum){
 
-  var planets = []; 
+  var planets = [];
   for(var i = 0; i < planetNum; i++){
     var values = {speed:0, size:0, distance:0, colour:null};
     planets[i] = values;
@@ -38,10 +38,10 @@ function createArray(planetNum){
 function fetchCookie(){
 
   var q = new XMLHttpRequest();
-  q.open("GET", "load?" + document.cookie, true);
+  q.open("GET", "load?" + sessionStorage.getItem('id'), true);
   q.onreadystatechange = server;
   q.send();
-  
+
 }
 
 //Gets data from the server, places data in array then calls main function loop
@@ -51,7 +51,7 @@ function server(){
         var string=this.responseText;
         var attributes = string.split("&");
         var i, j = 0;
-        
+
         for(i = 0; i < planetNum; i++){
           planets[i]["distance"] = attributes[j];
           planets[i]["size"] = attributes[j+1];
@@ -61,13 +61,13 @@ function server(){
         }
         system();
      }
-     
+
 }
 
 //re-directs back to initial page - called when title clicked on
 function link()  {
 
-  window.location.href = "http://localhost:8080/index.html";
+  window.location.href = "https://localhost:8080/index.html";
 
 }
 
@@ -76,9 +76,9 @@ function createLight(scene)  {
 
   var ambilight	= new THREE.AmbientLight( 0x151515 );
 	scene.add( ambilight );
-  
+
   var light	= new THREE.DirectionalLight( 0xffffff, 1 );
-  
+
   light.position.set(5,5,5);
   scene.add(light);
   light.castShadow	= true;
@@ -96,7 +96,7 @@ function createLight(scene)  {
 
   light.shadowMapWidth	= 1024;
   light.shadowMapHeight	= 1024;
-  
+
 }
 
 //adds sun then sets up and adds each planet to an array and the scene
@@ -104,9 +104,9 @@ function addPlanets(scene)  {
 
     Sun = THREEx.Planets.createSun();
     scene.add(Sun);
-  
+
     var solarSystem = []
-    
+
     for(var i = 0; i < planetNum; i++)  {
         solarSystem[i] = THREEx.Planets.createJupiter(planets[i]["colour"]);
         solarSystem[i].scale.x = planets[i]["size"];
@@ -125,11 +125,11 @@ function addPlanets(scene)  {
 //sets an array for each planets angle
 function getAngles()  {
 
-    var angles = []; 
+    var angles = [];
     for(var i = 0; i < planetNum; i++)  {
         angles[i] = 0;
-    }   
-    
+    }
+
     return angles;
 }
 
@@ -153,7 +153,7 @@ function getCamera(scene)  {
 	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100);
 	camera.position.set(0,6,0);
 	scene.add(camera);
-	
+
 	return camera;
 
 }
@@ -172,7 +172,7 @@ function system()  {
     var systemPlanets = addPlanets(scene);
     var Angles = getAngles();
  	var updateFcts	= [];
- 	
+
  	//update functoions
     updateFcts.push(function(delta, now){
         for(var i = 0; i < planetNum; i++)  {

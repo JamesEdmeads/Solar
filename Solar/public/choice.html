@@ -23,24 +23,24 @@
   <!-- scripts -->
   <script src = "js/choice.js"></script>
   <script src = "noUiSlider/nouislider.min.js"></script>
-  
+
   <!-- sliders and hidden form -->
-  <form id = "All" method="post" action="http://localhost:8080/save" >
+  <form id = "All" method="post" action="https://localhost:8080/save" >
     <h1 id = "title">SOLARBUILDER</h1>
     <img id = "progress" ></img>
-    
+
     <div class = "noHead">
-    
+
         <!-- planet distance -->
         <div id = "orbitDistance">Orbit Distance</div>
         <div id = "orbitDisSlide" class = "slider">
             <input type="hidden" name = "distance" value ="0" id="orbdis"></input>
-        </div> 
+        </div>
         <p id = "close">close</p>
         <p id = "far">far</p>
 
         <!-- planetSize -->
-        <div id = "planetSize">Planet Size</div>    
+        <div id = "planetSize">Planet Size</div>
         <div id = "planetSizeSlide" class = "slider">
             <input type="hidden" name = "size" value ="0" id="plansize"></input>
         </div>
@@ -70,7 +70,7 @@
     <!-- hidden parts of form for planet number and user -->
     <input type = "hidden" name = "count" value = "1" id = "planetCount"></input>
     <input type = "hidden" name = "user" value = "-1" id = "user"></input>
-   
+
     <!-- form send button -->
     <input id="Go" type="submit" value="Next Planet"/>
 

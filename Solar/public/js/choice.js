@@ -1,10 +1,10 @@
-/* This handles all javascript on the choice page : 
+/* This handles all javascript on the choice page :
         sets up and monitors slider values
         records colour select changes
         records the current planet via session storage
         places all these values and session cookie into hidden form
         listens for help button clicks
-        displays modals for help 
+        displays modals for help
         listens to modal being closed
         updates images according to count
 */
@@ -16,7 +16,7 @@ function ColourSel()  {
     var value = document.getElementById('Colchoice');
     var text0 = value.options[value.selectedIndex].text;
     document.getElementById('col').value = text0;
-  
+
 }
 
 //resets count in storage to 0 and re-directs users to index screen
@@ -24,18 +24,18 @@ function titleLink()  {
 
     "use strict"
     sessionStorage.setItem('cnt', 0);
-    window.location.href = "http://localhost:8080/index.html";
+    window.location.href = "https://localhost:8080/index.html";
 
 }
 
-//updates count when each planets details submitted, resets on 5 when system 
+//updates count when each planets details submitted, resets on 5 when system
 //is shown
 function inCount() {
-    
+
     "use strict"
     var count = sessionStorage.getItem('cnt');
     count++;
- 
+
     if(count >= 5){
         count = 0;
     }
@@ -45,7 +45,7 @@ function inCount() {
 }
 
 //unable to use strict with this function due to noUiSlider non-compatibility
-//modified from noUiSlider library. Reference : 
+//modified from noUiSlider library. Reference :
 //https://refreshless.com/nouislider/
 
 //creates each slider and adjusts values.
@@ -102,7 +102,7 @@ function actionSliders(arr)  {
 
 //adds event listeners to help buttons
 function actionHelp(helpAll)  {
-    
+
     "use strict";
     for(i = 0; i < helpAll.length; i++)  {
         helpAll[i].addEventListener('click', help);
@@ -111,22 +111,22 @@ function actionHelp(helpAll)  {
 }
 
 //displays help modal content when help buttons pressed
-function help(event)  { 
+function help(event)  {
 
     "use strict";
     var modal = this.nextElementSibling;
-    modal.style.display = "block"; 
-  
+    modal.style.display = "block";
+
 }
 
 //adds event listeners to modal closures
 function actionFinish(fin)  {
-    
+
     "use strict";
     for(i = 0; i < fin.length; i++)  {
         fin[i].addEventListener('click', stop);
     }
-  
+
 }
 
 //when modal closure selected changes display to none to close
@@ -135,27 +135,27 @@ function stop(event)  {
     "use strict";
     var x = this.parentNode.parentNode;
     x.style.display = 'none';
-  
+
 }
 
-//updates the session count, the picture that signifies the count, and the 
+//updates the session count, the picture that signifies the count, and the
 //form button value
 //places the count and user into the hidden form
 function updateValues()  {
-    
+
     "use strict"
     var count = sessionStorage.getItem('cnt');
     count++;
     document.getElementById('planetCount').value = count;
 
     updatePicture(count);
-  
+
     if(count >= 5)  {
         document.getElementById('Go').value = "Show Solar System";
     }
 
-    document.getElementById('user').value = document.cookie;  
-  
+    document.getElementById('user').value = sessionStorage.getItem('id');
+
 }
 
 //changes the planet count picture
@@ -169,7 +169,7 @@ function updatePicture(count)  {
 }
 
 
-//main set up function, gets all needed elements to attach event listeners to 
+//main set up function, gets all needed elements to attach event listeners to
 function setUp() {
 
     "use strict";
@@ -189,11 +189,11 @@ function setUp() {
     var SlideDis = document.getElementById('orbitDisSlide');
     var SlideSize = document.getElementById('planetSizeSlide');
     var SlideSpeed = document.getElementById('speedSlide');
-    
+
     var allSliders = [SlideDis, SlideSize, SlideSpeed];
     var allHelp = [OrbHelp, ColourHelp, SizeHelp, SpeedHelp];
     var allFinish = [finish0, finish1, finish2, finish3];
- 
+
     document.getElementById('Colchoice').addEventListener('change', ColourSel);
     document.getElementById('title').addEventListener('click', titleLink);
     document.getElementById('Go').addEventListener('click', inCount);

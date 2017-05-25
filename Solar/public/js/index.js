@@ -7,7 +7,7 @@
 
 "use strict"
 
-var cookie = document.cookie;
+var cookie = sessionStorage.getItem('id');
 var cpyCookie = (' '+cookie).slice(1);
 
 //sends copy of the cookie to the server for the database to check
@@ -16,8 +16,9 @@ function fetchCookie(){
     var q = new XMLHttpRequest();
     q.open("GET", "check?" + cpyCookie, true);
     q.onreadystatechange = insertCookie;
+    console.log("CPY-------------------COOKIE", cpyCookie);
     q.send();
-  
+
 }
 
 
@@ -26,18 +27,19 @@ function fetchCookie(){
 function insertCookie(){
 
     if (this.readyState == 4 && this.status == 200) {
+        console.log("TEST");
         var response = this.responseText;
         var split = response.split("&");
-        document.cookie = split[0];
+        sessionStorage.setItem('id', split[0]);
         show(split[1]);
   }
-     
+
 }
 
 //called when server has sent a reponse and changes what elements appear on screen
 function show(pNum)  {
 
-    if (document.cookie == cpyCookie && pNum >= 5) {
+    if (sessionStorage.getItem('id') == cpyCookie && pNum >= 5) {
         document.getElementById('login').style.display = 'block';
     }
     document.getElementById('choosePlanet').style.display = "block";
@@ -46,16 +48,16 @@ function show(pNum)  {
 
 //re-directs to the solar system page
 function goSolar()  {
-   
-    window.location.href = "http://localhost:8080/solar.html";
+
+    window.location.href = "https://localhost:8080/solar.html";
 
 }
 
 //re-directs to the planet choice page
 function goChoice()  {
 
-    window.location.href = "http://localhost:8080/choice.html";
-  
+    window.location.href = "https://localhost:8080/choice.html";
+
 }
 
 //closes modal for cookie warning
@@ -66,21 +68,21 @@ function close()  {
 }
 
 //Main set up function: if cookie has not yet been set will display alert,
-//calls the function to check the cookie and adds event listeners for the 
+//calls the function to check the cookie and adds event listeners for the
 //buttons
 function setUp()  {
 
-    if (cookie.length < 1)  {
+    if (cookie == null || cookie.length < 1)  {
         document.getElementById('modContent').style.display = "block";
         cpyCookie = -1;
     }
-    
+
     fetchCookie();
 
     document.getElementById("login").addEventListener('click', goSolar);
     document.getElementById("choosePlanet").addEventListener('click', goChoice);
     document.getElementById('X').addEventListener('click', close);
-    
+
 }
 
 addEventListener('load', setUp);
