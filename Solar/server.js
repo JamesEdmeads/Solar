@@ -18,8 +18,8 @@ var QS = require("querystring");
 var fs = require("fs");
 
 var options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
 };
 
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
@@ -61,14 +61,18 @@ function startHTTPS(port) {
 // Generates new id if not
 function check(id, response, type){
 
-  if(id == null){ renderHTML("./public/index.html", response, type); }
-  else{ dbmethod.checkUser(id, execute);
+    if(id == null){ renderHTML("./public/index.html", response, type); }
+    else{ dbmethod.checkUser(id, execute);}
     function execute(result){
-      var textTypeHeader = { "Content-Type": "text/plain" };
-      response.writeHead(200, textTypeHeader);
-      response.end(result);
+        if(result == "Fail")  {
+            renderHTML("./public/index.html", response, type);
+        }
+        else  {
+            var textTypeHeader = { "Content-Type": "text/plain" };
+            response.writeHead(200, textTypeHeader);
+            response.end(result);
+        } 
     }
-  }
 }
 
 // Saves or updates planets attributes
@@ -84,17 +88,17 @@ function save(request, response, type){
 
   // splits the usefull data into an array
   function end() {
-    var params = QS.parse(body);
-    dbmethod.insert(params.count, params.distance, params.size, params.speed, params.colour, params.user);
-    parameters = "";
-    parameters = parameters + params.distance + "&";
-    parameters = parameters + params.size + "&";
-    parameters = parameters + params.speed + "&";
-    parameters = parameters + params.colour;
+      var params = QS.parse(body);
+      dbmethod.insert(params.count, params.distance, params.size, params.speed, params.colour, params.user);
+      parameters = "";
+      parameters = parameters + params.distance + "&";
+      parameters = parameters + params.size + "&";
+      parameters = parameters + params.speed + "&";
+      parameters = parameters + params.colour;
 
     // Only when all five planets are set, redirects to solar.html
-    if(params.count >= 5){ renderHTML("./public/solar.html", response, type); }
-    else{ renderHTML("./public/choice.html", response, type); }
+      if(params.count >= 5){ renderHTML("./public/solar.html", response, type); }
+      else{ renderHTML("./public/choice.html", response, type); }
   }
 
 }
@@ -102,26 +106,25 @@ function save(request, response, type){
 // Loads the solar system if there is one
 function load(id, response, type){
 
-  dbmethod.getplanet(execute, id);
+    dbmethod.getplanet(execute, id);
 
-  function execute(result){
-    if(result == "fail"){
-      renderHTML("./public/index.html", response, type);
-    }else{
-      var textTypeHeader = { "Content-Type": "text/plain" };
-      response.writeHead(200, textTypeHeader);
-      response.end(result);
+    function execute(result){
+        if(result == "fail"){
+            renderHTML("./public/index.html", response, type);
+        }else{
+            var textTypeHeader = { "Content-Type": "text/plain" };
+            response.writeHead(200, textTypeHeader);
+            response.end(result);
+        }
     }
-  }
-
 }
 
 // Loads the website if it is allowed
 function defaultReply(response, type, url){
 
-  if (type == null) return fail(response, BadType, "File type unsupported");
-  var file = "./public" + url;
-  renderHTML(file, response, type);
+    if (type == null) return fail(response, BadType, "File type unsupported");
+    var file = "./public" + url;
+    renderHTML(file, response, type);
 
 }
 
@@ -140,10 +143,10 @@ function handleHTTPS(request, response) {
 
     // The main tree of the website:
     switch (requestURL[0]) {
-      case "/check": check(requestURL[1], response, type); break;
-      case "/save": save(request, response, type); break;
-      case "/load": load(requestURL[1], response, type); break;
-      default: defaultReply(response, type, url);
+        case "/check": check(requestURL[1], response, type); break;
+        case "/save": save(request, response, type); break;
+        case "/load": load(requestURL[1], response, type); break;
+        default: defaultReply(response, type, url);
     }
 
 }
@@ -151,8 +154,8 @@ function handleHTTPS(request, response) {
 // Delivers the website
 function renderHTML(file, response, type){
 
-  fs.readFile(file, ready);
-  function ready(err, content) { deliver(response, type, err, content); }
+    fs.readFile(file, ready);
+    function ready(err, content) { deliver(response, type, err, content); }
 
 }
 
@@ -172,12 +175,12 @@ function reject(url) {
     var rejectable = ["/./", "/../", "//"];
 
     if(!isValid(url) || url.length > 2000 || url[0] != "/"){
-      return true;
+        return true;
     }
 
     for (var i=0; i<rejectable.length; i++) {
         if (url.indexOf(rejectable[i]) !== -1){
-          return true
+            return true
         };
     }
 
@@ -210,15 +213,15 @@ function findType(url, request) {
 
     if (accepts.indexOf(otype) >= 0){
 
-      if (accepts.indexOf(ntype) >= 0){
-        var dot = url.lastIndexOf(".");
-        extension = url.substring(dot + 1);
-      }else{ extension = "html"; }
+        if (accepts.indexOf(ntype) >= 0){
+            var dot = url.lastIndexOf(".");
+            extension = url.substring(dot + 1);
+        }else{ extension = "html"; }
 
     }else{
 
-      var dot = url.lastIndexOf(".");
-      extension = url.substring(dot + 1);
+        var dot = url.lastIndexOf(".");
+        extension = url.substring(dot + 1);
 
     }
 

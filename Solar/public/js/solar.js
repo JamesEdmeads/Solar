@@ -17,18 +17,16 @@ addEventListener('load', fetchId);
 //2D array holds the values for each planet
 var planetNum = 5;
 var planets = createArray(planetNum);
-
-
 var Sun;
 
 //Creates 2D array filled with zeros.
 function createArray(planetNum){
 
-  var planets = [];
-  for(var i = 0; i < planetNum; i++){
-    var values = {speed:0, size:0, distance:0, colour:null};
-    planets[i] = values;
-  }
+    var planets = [];
+    for(var i = 0; i < planetNum; i++){
+        var values = {speed:0, size:0, distance:0, colour:null};
+        planets[i] = values;
+    }
 
   return planets;
 }
@@ -37,10 +35,10 @@ function createArray(planetNum){
 //sends current user id to server
 function fetchId(){
 
-  var q = new XMLHttpRequest();
-  q.open("GET", "load?" + sessionStorage.getItem('id'), true);
-  q.onreadystatechange = server;
-  q.send();
+    var q = new XMLHttpRequest();
+    q.open("GET", "load?" + sessionStorage.getItem('id'), true);
+    q.onreadystatechange = server;
+    q.send();
 
 }
 
@@ -53,11 +51,11 @@ function server(){
         var i, j = 0;
 
         for(i = 0; i < planetNum; i++){
-          planets[i]["distance"] = attributes[j];
-          planets[i]["size"] = attributes[j+1];
-          planets[i]["speed"] = parseFloat(attributes[j+2]);
-          planets[i]["colour"] = attributes[j+3];
-          j += 4;
+            planets[i]["distance"] = attributes[j];
+            planets[i]["size"] = attributes[j+1];
+            planets[i]["speed"] = parseFloat(attributes[j+2]);
+            planets[i]["colour"] = attributes[j+3];
+            j += 4;
         }
         system();
      }
@@ -67,35 +65,35 @@ function server(){
 //re-directs back to initial page - called when title clicked on
 function link()  {
 
-  window.location.href = "https://localhost:8080/index.html";
+    window.location.href = "https://localhost:8080/index.html";
 
 }
 
 //adds light to scene
 function createLight(scene)  {
 
-  var ambilight	= new THREE.AmbientLight( 0x151515 );
+    var ambilight = new THREE.AmbientLight( 0x151515 );
 	scene.add( ambilight );
 
-  var light	= new THREE.DirectionalLight( 0xffffff, 1 );
+    var light	= new THREE.DirectionalLight( 0xffffff, 1 );
 
-  light.position.set(5,5,5);
-  scene.add(light);
-  light.castShadow	= true;
-  light.shadowCameraNear	= 0.01;
-  light.shadowCameraFar	= 15;
-  light.shadowCameraFov	= 45;
+    light.position.set(5,5,5);
+    scene.add(light);
+    light.castShadow	= true;
+    light.shadowCameraNear	= 0.01;
+    light.shadowCameraFar	= 15;
+    light.shadowCameraFov	= 45;
 
-  light.shadowCameraLeft	= -1;
-  light.shadowCameraRight	=  1;
-  light.shadowCameraTop	=  1;
-  light.shadowCameraBottom= -1;
+    light.shadowCameraLeft	= -1;
+    light.shadowCameraRight	=  1;
+    light.shadowCameraTop	=  1;
+    light.shadowCameraBottom= -1;
 
-  light.shadowBias	= 0.001;
-  light.shadowDarkness	= 0.2;
+    light.shadowBias	= 0.001;
+    light.shadowDarkness	= 0.2;
 
-  light.shadowMapWidth	= 1024;
-  light.shadowMapHeight	= 1024;
+    light.shadowMapWidth	= 1024;
+    light.shadowMapHeight	= 1024;
 
 }
 
@@ -136,12 +134,12 @@ function getAngles()  {
 //sets up the renderer
 function getRenderer()  {
 
-    var renderer	= new THREE.WebGLRenderer({
-		antialias	: true
-	});
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	document.body.appendChild( renderer.domElement );
-	renderer.shadowMapEnabled	= true;
+    var renderer = new THREE.WebGLRenderer({
+        antialias	: true
+    });
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+    renderer.shadowMapEnabled	= true;
 
     return renderer;
 
@@ -150,11 +148,11 @@ function getRenderer()  {
 //initiates camera, sets the position and adds to scene
 function getCamera(scene)  {
 
-	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100);
-	camera.position.set(0,6,0);
-	scene.add(camera);
+    var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100);
+    camera.position.set(0,6,0);
+    scene.add(camera);
 
-	return camera;
+    return camera;
 
 }
 
@@ -165,8 +163,8 @@ function system()  {
     document.getElementById('title').addEventListener('click', link);
 
     var renderer = getRenderer();
-	var scene = new THREE.Scene();
-	var camera	= getCamera(scene);
+    var scene = new THREE.Scene();
+    var camera	= getCamera(scene);
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     createLight(scene);
     var systemPlanets = addPlanets(scene);
@@ -180,7 +178,7 @@ function system()  {
 
         }
         Sun.rotation.y += 1 * delta;
-	});
+    });
 
     updateFcts.push(updatePlanets);
     function updatePlanets()  {
@@ -191,23 +189,23 @@ function system()  {
         }
     }
 
-	updateFcts.push(function(){
-		renderer.render( scene, camera );
-	});
+    updateFcts.push(function(){
+        renderer.render( scene, camera );
+    });
 
     //animation loop
-	var lastTimeMsec= null;
-	requestAnimationFrame(function animate(nowMsec){
-		// keep looping
-		requestAnimationFrame( animate );
-		// measure time
-		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60;
-		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec);
-		lastTimeMsec	= nowMsec;
-		// call each update function
-		updateFcts.forEach(function(updateFn){
-			updateFn(deltaMsec/1000, nowMsec/1000);
-		});
-	});
+    var lastTimeMsec= null;
+    requestAnimationFrame(function animate(nowMsec){
+        // keep looping
+        requestAnimationFrame( animate );
+        // measure time
+        lastTimeMsec	= lastTimeMsec || nowMsec-1000/60;
+        var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec);
+        lastTimeMsec	= nowMsec;
+        // call each update function
+        updateFcts.forEach(function(updateFn){
+            updateFn(deltaMsec/1000, nowMsec/1000);
+        });
+    });
 
 }
