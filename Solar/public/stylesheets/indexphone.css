@@ -62,10 +62,10 @@ form  {
 }
 
 button {
-  background-color: white;
+  background-color: rgb(255,255,255);
   width : 200px;
   border: none;
-  color: black;
+  color: rgb(0,0,0);
   padding: 8px 14px;
   text-decoration: none;
   margin: 5px 2px;

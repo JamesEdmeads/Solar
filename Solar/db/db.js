@@ -108,7 +108,7 @@ module.exports = {
             }catch(err){
                 var id = generateUUID();
                 var response = addUser(id);
-                if(response == "success")  {
+                if(response === "success")  {
                     execute(result + id);
                 }
                 else {

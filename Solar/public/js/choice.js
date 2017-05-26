@@ -24,7 +24,7 @@ function titleLink()  {
 
     "use strict"
     sessionStorage.setItem('cnt', 0);
-    window.location.href = "https://localhost:8080/index.html";
+    window.location.href = "../index.html";
 
 }
 

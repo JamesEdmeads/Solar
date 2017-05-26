@@ -18,8 +18,8 @@ var QS = require("querystring");
 var fs = require("fs");
 
 var options = {
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
+    key: fs.readFileSync('key/key.pem'),
+    cert: fs.readFileSync('key/cert.pem')
 };
 
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
@@ -61,10 +61,10 @@ function startHTTPS(port) {
 // Generates new id if not
 function check(id, response, type){
 
-    if(id == null){ renderHTML("./public/index.html", response, type); }
+    if(id === null){ renderHTML("./public/index.html", response, type); }
     else{ dbmethod.checkUser(id, execute);}
     function execute(result){
-        if(result == "Fail")  {
+        if(result === "Fail")  {
             renderHTML("./public/index.html", response, type);
         }
         else  {
@@ -109,7 +109,7 @@ function load(id, response, type){
     dbmethod.getplanet(execute, id);
 
     function execute(result){
-        if(result == "fail"){
+        if(result === "fail"){
             renderHTML("./public/index.html", response, type);
         }else{
             var textTypeHeader = { "Content-Type": "text/plain" };
@@ -122,7 +122,7 @@ function load(id, response, type){
 // Loads the website if it is allowed
 function defaultReply(response, type, url){
 
-    if (type == null) return fail(response, BadType, "File type unsupported");
+    if (type === null) return fail(response, BadType, "File type unsupported");
     var file = "./public" + url;
     renderHTML(file, response, type);
 
@@ -172,7 +172,7 @@ function isBanned(url) {
 
 // URL checking, rejects illegal/invalid/empty URLs
 function reject(url) {
-    var rejectable = ["/./", "/../", "//"];
+    var rejectable = ["/./", "/../", "//", "key", "db"];
 
     if(!isValid(url) || url.length > 2000 || url[0] != "/"){
         return true;
@@ -266,7 +266,7 @@ function banUpperCase(root, folder) {
         var file = folder + "/" + name;
         if (name != name.toLowerCase()) banned.push(file.toLowerCase());
         var mode = fs.statSync(root + file).mode;
-        if ((mode & folderBit) == 0) continue;
+        if ((mode & folderBit) === 0) continue;
         banUpperCase(root, file);
     }
 

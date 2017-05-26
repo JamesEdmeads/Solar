@@ -1,7 +1,7 @@
 /*for phone sized screens : choice.html*/
 
 #All  {
-  top : 150px;
+  top : 50px;
 }
 
 #title  {
@@ -49,20 +49,20 @@ select {
 }
 
 #orbitHelp {
-  top : 305px;
+  top : 205px;
 }
 
 #speedHelp{
-  top : 380px;
+  top : 280px;
 }
 
 #sizeHelp{
-  top : 455px;
+  top : 355px;
  
 }
 
 #colourHelp {
-  top : 530px;
+  top : 430px;
 }
 
 #ColorHelpMod, #SizeHelpMod, #SpeedHelpMod {

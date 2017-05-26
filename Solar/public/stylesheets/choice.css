@@ -3,7 +3,7 @@
 
 /*back ground image*/
 body {
-  background-color : black;
+  background-color : rgb(0,0,0);
   background-image: url("../images/background2.png");
   background-size : auto-cover;
   /*for zoom - cover - for general auto-cover = positioning*/
@@ -14,7 +14,7 @@ body {
 
 /*All contains everything within the area of the form. All sliders and words*/
 #All  {
-  color : white;
+  color : rgb(255,255,255);
   text-align : center;
   position : relative;
   top : 25%;
@@ -30,29 +30,33 @@ body {
 
 /*title: main solar builder title on page*/
 #title  {
-  text-shadow: 2px 2px 8px black;
-  color : white;
+  text-shadow: 2px 2px 8px rgb(0,0,0);
+  color : rgb(255,255,255);
   position : absolute;
   left : 40px;
   cursor : pointer;
 }
 
-/*p covers all words on the page other than title*/
+/*p covers all words on the page other than titles*/
 p  {
   font-size : 0.8em;
 }
 
+.slideName  {
+  font-size : 1em;
+}
+
 /*sliders*/
 #planetSizeSlide .noUi-base {
-  background: white;
+  background: rgb(255,255,255);
 }
 
 #orbitDisSlide .noUi-base {
-  background: white;
+  background: rgb(255,255,255);
 }
 
 #speedSlide .noUi-base {
-  background: white;
+  background: rgb(255,255,255);
 }
 
 .slider  {
@@ -79,7 +83,7 @@ p  {
   padding-left  : 2px;
   padding-right : 7px;
   position : absolute;
-  top : 150px;
+  top : 135px;
   right : 65%;
 }
 
@@ -99,7 +103,7 @@ p  {
   position : absolute;
   padding-left  : 10px;
   padding-right : 50px;
-  top : 375px;
+  top : 350px;
   right : 65%;
 }
 
@@ -109,7 +113,7 @@ p  {
   position : absolute;
   padding-left  : 2px;
   padding-right : 14px;
-  top : 225px;
+  top : 210px;
   right : 65%;
 }
 
@@ -130,7 +134,7 @@ p  {
   position : absolute;
   padding-right : 26px;
   padding-left  : 2px;
-  top : 300px;
+  top : 285px;
   right : 65%;
 }
 
@@ -157,7 +161,7 @@ select  {
   position : relative;
   top : -75px;
   left : 5%;
-  background-color : white;
+  background-color : rgb(255,255,255);
   cursor : pointer;
   border : none;
   font-family: Balboa Plus, 'Oswald', Helvetica, sans-serif;
@@ -166,9 +170,9 @@ select  {
 /*Form button on page*/
 #Go {
   width : 30%;
-  background-color: white;
+  background-color: rgb(255,255,255);
   border: none;
-  color: black;
+  color: rgb(0,0,0);
   padding: 8px 14px;
   text-decoration: none;
   margin: 5px 2px;
@@ -182,7 +186,7 @@ select  {
 /*help buttons*/
 
 .help  {
-  color : white;
+  color : rgb(255,255,255);
   background-color : transparent;
   position : absolute;
   left : 72%;
@@ -190,7 +194,7 @@ select  {
   height : 20px;
   width : 20px;
   border-radius: 50%;
-  border  :1px solid white;
+  border  :1px solid rgb(255,255,255);
   cursor: pointer;
 }
 
@@ -237,44 +241,44 @@ select  {
 }
 
 .modal-content {
-  background-color: white;
+  background-color: rgb(255,255,255);
   margin: auto;
   padding: 10px;
-  border: 1px solid DarkGrey;
+  border: 1px solid rgb(169,169,169);
   width: 80%;
 }
 
 /*modal closures */
 #X0, #X1, #X2, #X3{
-  color: LightGrey;
+  color: rgb(211,211,211);
   float: right;
   font-size : 14px;
 }
 
 #X0:hover,
 #X0:focus {
-  color: black;
+  color: rgb(0,0,0);
   text-decoration: none;
   cursor: pointer;
 }
 
 #X1:hover,
 #X1:focus {
-  color: black;
+  color: rgb(0,0,0);
   text-decoration: none;
   cursor: pointer;
 }
 
 #X2:hover,
 #X2:focus {
-  color: black;
+  color: rgb(0,0,0);
   text-decoration: none;
   cursor: pointer;
 }
 
 #X3:hover,
 #X3:focus {
-  color: black;
+  color: rgb(0,0,0);
   text-decoration: none;
   cursor: pointer;
 }

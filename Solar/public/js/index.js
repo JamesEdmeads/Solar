@@ -7,37 +7,33 @@
 
 "use strict"
 
-var id = sessionStorage.getItem('id');
-var cpyId = (' '+id).slice(1);
-
 //sends copy of the cookie to the server for the database to check
-function fetchId(){
+//deals with server reponse: sets document cookie and passes value of planet
+//count to show function
+function fetchId(cpyId){
 
     var q = new XMLHttpRequest();
     q.open("GET", "check?" + cpyId, true);
     q.onreadystatechange = insertId;
+    
+    function insertId(){
+
+        if (this.readyState === 4 && this.status === 200) {
+            var response = this.responseText;
+            var split = response.split("&");
+            sessionStorage.setItem('id', split[0]);
+            show(split[1], cpyId);
+        }
+
+    }
     q.send();
 
 }
 
-
-//deals with server reponse: sets document cookie and passes value of planet
-//count to show function
-function insertId(){
-
-    if (this.readyState == 4 && this.status == 200) {
-        var response = this.responseText;
-        var split = response.split("&");
-        sessionStorage.setItem('id', split[0]);
-        show(split[1]);
-  }
-
-}
-
 //called when server has sent a reponse and changes what elements appear on screen
-function show(pNum)  {
+function show(pNum, cpyId)  {
 
-    if (sessionStorage.getItem('id') == cpyId && pNum >= 5) {
+    if (sessionStorage.getItem('id') === cpyId && pNum >= 5) {
         document.getElementById('login').style.display = 'block';
     }
     document.getElementById('choosePlanet').style.display = "block";
@@ -47,14 +43,14 @@ function show(pNum)  {
 //re-directs to the solar system page
 function goSolar()  {
 
-    window.location.href = "https://localhost:8080/solar.html";
+    window.location.href = "../solar.html";
 
 }
 
 //re-directs to the planet choice page
 function goChoice()  {
 
-    window.location.href = "https://localhost:8080/choice.html";
+    window.location.href = "../choice.html";
 
 }
 
@@ -70,12 +66,15 @@ function close()  {
 //buttons
 function setUp()  {
 
-    if (id == null || id.length < 1)  {
+    var id = sessionStorage.getItem('id');
+    var cpyId = (' '+id).slice(1);
+    
+    if (id === null || id.length < 1)  {
         document.getElementById('modContent').style.display = "block";
         cpyId = -1;
     }
 
-    fetchId();
+    fetchId(cpyId);
 
     document.getElementById("login").addEventListener('click', goSolar);
     document.getElementById("choosePlanet").addEventListener('click', goChoice);

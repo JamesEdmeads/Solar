@@ -16,48 +16,48 @@
      href="stylesheets/choicetablet.css" type="text/css" />
   <link rel="stylesheet" media="screen and (max-width : 600px) "
        href="stylesheets/chphone.css" type="text/css" ></link>
+    <!-- scripts -->
+  <script src = "js/choice.js"></script>
+  <script src = "noUiSlider/nouislider.min.js"></script>
 
 </head>
 
 <body>
-  <!-- scripts -->
-  <script src = "js/choice.js"></script>
-  <script src = "noUiSlider/nouislider.min.js"></script>
 
   <!-- sliders and hidden form -->
   <form id = "All" method="post" action="https://localhost:8080/save" >
     <h1 id = "title">SOLARBUILDER</h1>
     <img id = "progress" ></img>
 
-    <div class = "noHead">
+    <section class = "noHead">
 
         <!-- planet distance -->
-        <div id = "orbitDistance">Orbit Distance</div>
-        <div id = "orbitDisSlide" class = "slider">
+        <p id = "orbitDistance" class = "slideName">Orbit Distance</p>
+        <section id = "orbitDisSlide" class = "slider">
             <input type="hidden" name = "distance" value ="0" id="orbdis"></input>
-        </div>
+        </section>
         <p id = "close">close</p>
         <p id = "far">far</p>
 
         <!-- planetSize -->
-        <div id = "planetSize">Planet Size</div>
-        <div id = "planetSizeSlide" class = "slider">
+        <p id = "planetSize" class = "slideName">Planet Size</p>
+        <section id = "planetSizeSlide" class = "slider">
             <input type="hidden" name = "size" value ="0" id="plansize"></input>
-        </div>
+        </section>
         <p id = "small">small</p>
         <p id = "large">large</p>
 
         <!-- planet speed -->
-        <div id = "speedOrbit">Planet Speed</div>
-        <div id = "speedSlide" class = "slider">
+        <p id = "speedOrbit" class = "slideName">Planet Speed</p>
+        <section id = "speedSlide" class = "slider">
             <input type="hidden" name = "speed" value ="0" id="spchange"></input>
-        </div>
+        </section>
         <p id = "slow">slow</p>
         <p id = "fast">fast</p>
 
         <!-- planet colour -->
-        <div id = "colour">Colour</div>
-        <div id = "colorSelect" method="get" class = "table">
+        <p id = "colour" class = "slideName">Colour</p>
+        <section id = "colorSelect" method="get" class = "table">
           <input type = "hidden" name = "colour" value ="mercury" id="col"></input>
           <select id = "Colchoice">
             <option value = "mercury">mercury</option>
@@ -70,55 +70,55 @@
             <option value = "neptune">neptune</option>
             <option value = "pluto">pluto</option>
           </select>
-        </div>
+        </section>
 
-    </div>
+    </section>
 
     <!-- hidden parts of form for planet number and user -->
     <input type = "hidden" name = "count" value = "1" id = "planetCount"></input>
     <input type = "hidden" name = "user" value = "-1" id = "user"></input>
 
     <!-- form send button -->
-    <input id="Go" type="submit" value="Next Planet"/>
+    <input id="Go" type="submit" value="Next Planet"></input>
 
   </form>
 
   <!-- modals and buttons for help -->
   <button id = "orbitHelp" class = "help">?</button>
 
-  <div id = "OhelpModal" class="modal">
+  <section id = "OhelpModal" class="modal">
     <div class="modal-content">
       <span id = "X0">X</span>
         <p>Select the planets distance from the sun</p>
     </div>
-  </div>
-
-  <button id = "sizeHelp" class = "help">?</button>
-
-  <div id = "SizeHelpMod" class="modal">
-    <div class="modal-content">
-      <span id = "X2">X</span>
-        <p>Select the size of your planet</p>
-    </div>
-  </div>
+  </section>
 
   <button id = "speedHelp" class = "help">?</button>
 
-  <div id = "SpeedHelpMod" class="modal">
+  <section id = "SpeedHelpMod" class="modal">
     <div class="modal-content">
       <span id = "X3">X</span>
         <p>Select the speed of your planet</p>
     </div>
-  </div>
+  </section>
+
+  <button id = "sizeHelp" class = "help">?</button>
+
+  <section id = "SizeHelpMod" class="modal">
+    <div class="modal-content">
+      <span id = "X2">X</span>
+        <p>Select the size of your planet</p>
+    </div>
+  </section>
 
   <button id = "colourHelp" class = "help">?</button>
 
-  <div id = "ColorHelpMod" class="modal">
+  <section id = "ColorHelpMod" class="modal">
     <div class="modal-content" >
       <span id = "X1">X</span>
         <p>Select the colour of your planet</p>
     </div>
-  </div>
+  </section>
 
 </body>
 

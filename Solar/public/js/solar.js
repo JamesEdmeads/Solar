@@ -15,6 +15,7 @@ each position on each frame
 addEventListener('load', fetchId);
 
 //2D array holds the values for each planet
+//global variables needed for 3D planet library
 var planetNum = 5;
 var planets = createArray(planetNum);
 var Sun;
@@ -45,7 +46,7 @@ function fetchId(){
 //Gets data from the server, places data in array then calls main function loop
 function server(){
 
-     if (this.readyState==4 && this.status==200){
+     if (this.readyState === 4 && this.status === 200){
         var string=this.responseText;
         var attributes = string.split("&");
         var i, j = 0;
@@ -65,7 +66,7 @@ function server(){
 //re-directs back to initial page - called when title clicked on
 function link()  {
 
-    window.location.href = "https://localhost:8080/index.html";
+    window.location.href = "../index.html";
 
 }
 
