@@ -17,11 +17,6 @@ var http = require("http"); // http server that redirects to https
 var QS = require("querystring");
 var fs = require("fs");
 
-var options = {
-    key: fs.readFileSync('key/key.pem'),
-    cert: fs.readFileSync('key/cert.pem')
-};
-
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var types, banned, parameters = "";
 var dbmethod = require("./db/db.js");
@@ -44,6 +39,11 @@ function handleHTTP(request, response) {
 
 // Start the http service.  Accept only requests from localhost, for security.
 function startHTTPS(port) {
+
+    var options = {
+        key: fs.readFileSync('key/key.pem'),
+        cert: fs.readFileSync('key/cert.pem')
+    };
 
     types = defineTypes();
     banned = [];
@@ -71,8 +71,8 @@ function check(id, response, type){
             var textTypeHeader = { "Content-Type": "text/plain" };
             response.writeHead(200, textTypeHeader);
             response.write(result);
-            response.end();          
-        } 
+            response.end();
+        }
     }
 }
 
@@ -116,7 +116,7 @@ function load(id, response, type){
             var textTypeHeader = { "Content-Type": "text/plain" };
             response.writeHead(200, textTypeHeader);
             response.end(result);
-            
+
         }
     }
 }

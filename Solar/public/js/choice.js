@@ -22,7 +22,7 @@ function ColourSel()  {
 //resets count in storage to 0 and re-directs users to index screen
 function titleLink()  {
 
-    "use strict"
+    "use strict";
     sessionStorage.setItem('cnt', 0);
     window.location.href = "../index.html";
 
@@ -32,7 +32,7 @@ function titleLink()  {
 //is shown
 function inCount() {
 
-    "use strict"
+    "use strict";
     var count = sessionStorage.getItem('cnt');
     count++;
 
@@ -143,7 +143,7 @@ function stop(event)  {
 //places the count and user into the hidden form
 function updateValues()  {
 
-    "use strict"
+    "use strict";
     var count = sessionStorage.getItem('cnt');
     count++;
     document.getElementById('planetCount').value = count;
@@ -161,7 +161,7 @@ function updateValues()  {
 //changes the planet count picture
 function updatePicture(count)  {
 
-    "use strict"
+    "use strict";
     var path = "images/progress";
     path = path+count+".png";
     document.getElementById('progress').src = path;
