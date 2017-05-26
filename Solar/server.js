@@ -70,7 +70,8 @@ function check(id, response, type){
         else  {
             var textTypeHeader = { "Content-Type": "text/plain" };
             response.writeHead(200, textTypeHeader);
-            response.end(result);
+            response.write(result);
+            response.end();          
         } 
     }
 }
@@ -115,6 +116,7 @@ function load(id, response, type){
             var textTypeHeader = { "Content-Type": "text/plain" };
             response.writeHead(200, textTypeHeader);
             response.end(result);
+            
         }
     }
 }

@@ -1,9 +1,5 @@
 /*for tablets szied screens*/
 
-body {
-  background-size : auto-cover;
-}
-
 button {
   width : 50%;
 }
