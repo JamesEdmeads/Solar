@@ -73,10 +73,10 @@ function link()  {
 //adds light to scene
 function createLight(scene)  {
 
-    var ambilight = new THREE.AmbientLight( 0x151515 );
+    var ambilight = new THREE.AmbientLight( 0x888888 );
 	scene.add( ambilight );
 
-    var light	= new THREE.DirectionalLight( 0xffffff, 1 );
+    var light	= new THREE.DirectionalLight( 0xcccccc, 1 );
 
     light.position.set(5,5,5);
     scene.add(light);
@@ -98,11 +98,36 @@ function createLight(scene)  {
 
 }
 
+
+//adapted from threex.planets library to provide sun glow
+function addSunGlow(scene, Sun)  {
+
+    var glowColor	= new THREE.Color('yellow')
+    
+    for(var i = 0; i < 2; i++)  {
+        var geometry = new THREE.SphereGeometry(0.5, 32, 32)
+        geometry = Sun.geometry.clone()
+	    var material = THREEx.createAtmosphereMaterial()
+	    if(i === 1)  {
+		    material.side	= THREE.BackSide
+	        material.uniforms.coeficient.value	= 0.5
+	        material.uniforms.power.value		= 1.5
+	    }
+	    material.uniforms.glowColor.value	= glowColor
+	    var mesh	= new THREE.Mesh(geometry, material );
+	    if(i === 0 ) mesh.scale.multiplyScalar(1.01);
+	    else mesh.scale.multiplyScalar(1.15);
+	    scene.add( mesh ); 
+    }    
+
+}
+
 //adds sun then sets up and adds each planet to an array and the scene
 function addPlanets(scene)  {
 
     Sun = THREEx.Planets.createSun();
     scene.add(Sun);
+    addSunGlow(scene, Sun);
 
     var solarSystem = []
 
@@ -150,7 +175,8 @@ function getRenderer()  {
 function getCamera(scene)  {
 
     var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100);
-    camera.position.set(0,6,0);
+    //camera.position.set(0,6,0);
+    camera.position.z = 2;
     scene.add(camera);
 
     return camera;
