@@ -74,7 +74,7 @@ function link()  {
 function createLight(scene)  {
 
     var ambilight = new THREE.AmbientLight( 0x888888 );
-	scene.add( ambilight );
+	  scene.add( ambilight );
 
     var light	= new THREE.DirectionalLight( 0xcccccc, 1 );
 
@@ -102,23 +102,23 @@ function createLight(scene)  {
 //adapted from threex.planets library to provide sun glow
 function addSunGlow(scene, Sun)  {
 
-    var glowColor	= new THREE.Color('yellow')
-    
+    var glowColor	= new THREE.Color('orange')
+
     for(var i = 0; i < 2; i++)  {
-        var geometry = new THREE.SphereGeometry(0.5, 32, 32)
-        geometry = Sun.geometry.clone()
+      var geometry = new THREE.SphereGeometry(0.5, 32, 32)
+      geometry = Sun.geometry.clone()
 	    var material = THREEx.createAtmosphereMaterial()
 	    if(i === 1)  {
 		    material.side	= THREE.BackSide
-	        material.uniforms.coeficient.value	= 0.5
-	        material.uniforms.power.value		= 1.5
+        material.uniforms.coeficient.value	= 0.1
+        material.uniforms.power.value		= 10
 	    }
 	    material.uniforms.glowColor.value	= glowColor
 	    var mesh	= new THREE.Mesh(geometry, material );
-	    if(i === 0 ) mesh.scale.multiplyScalar(1.01);
-	    else mesh.scale.multiplyScalar(1.15);
-	    scene.add( mesh ); 
-    }    
+	    if(i === 0) mesh.scale.multiplyScalar(1.01);
+	    else mesh.scale.multiplyScalar(2);
+	    scene.add( mesh );
+    }
 
 }
 
